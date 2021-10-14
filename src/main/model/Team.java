@@ -55,25 +55,6 @@ public class Team {
         }
         return false;
     }
-
-
-    // MODIFIES: this
-    // EFFECTS: if a player is on the roster, remove player from roster then return true
-    //          else, return false
-    public boolean removePlayer(Player p) {
-        if (roster.contains(p)) {
-            roster.remove(p);
-            return true;
-        }
-        return false;
-    }
-
-    //ToDO: finish implementation
-
-    // EFFECTS: returns the team's summary in each statistic category
-    public String teamSummary() {
-        return "";                            //stub
-    }
 }
 
 

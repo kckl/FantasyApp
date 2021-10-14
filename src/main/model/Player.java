@@ -72,5 +72,4 @@ public class Player {
         this.assists = assists;
     }
 
-    //Todo: method for trading players -> refer to librarian example
 }

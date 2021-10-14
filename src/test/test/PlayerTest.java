@@ -35,6 +35,8 @@ public class PlayerTest {
         assertEquals(stephCurry.getAssists(), 5.8);
         assertEquals(stephCurry.getPoints(), 32.0);
         assertEquals(stephCurry.getFieldGoalPct(), 48.2);
+        assertEquals(stephCurry.getFreeThrowPct(), 91.6);
+        assertEquals(stephCurry.getRebounds(), 5.5);
 
     }
 

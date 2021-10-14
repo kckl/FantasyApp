@@ -4,7 +4,6 @@ import model.League;
 import model.Player;
 import model.Team;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class FantasyApp {
@@ -28,12 +27,14 @@ public class FantasyApp {
     // Link: [https://github.students.cs.ubc.ca/CPSC210/TellerApp.git]
 
     // MODIFIES: this
-    // EFFECTS: parses user input
+    // EFFECTS: processes user input
     private void runFantasyApp() {
         continueApp = true;
         String command = "";
 
         initialize();
+
+        System.out.println("\nWelcome to the NBA Fantasy Helper! Please select from the following:\n");
 
         while (continueApp) {
             printHomeScreen();
@@ -46,7 +47,7 @@ public class FantasyApp {
                 processCommand(command);
             }
         }
-        System.out.println("\nHave fun!");
+        System.out.println("\nBye now and good luck with your team!");
     }
 
     // MODIFIES: this
@@ -63,19 +64,17 @@ public class FantasyApp {
         System.out.println("Enter '" + VIEW_COMMAND + "' to view all teams.");
         System.out.println("Enter '" + SETTINGS_COMMAND + "' to for league settings.");
         System.out.println("Enter '" + QUIT_APP_COMMAND + "' to quit the application.");
-
     }
 
     // REQUIRES: string is not empty
-    // EFFECTS: processes user command and prints information depending on the input
-
+    // EFFECTS: processes user command
     private void processCommand(String command) {
         switch (command) {
             case REGISTER_COMMAND:
                 registerTeamOption();
                 break;
             case DRAFT_COMMAND:
-                selectTeamMenu();
+                selectTeamOption();
                 break;
             case VIEW_COMMAND:
                 viewLeague();
@@ -126,7 +125,7 @@ public class FantasyApp {
                 registerTeamOption();
                 break;
             case "n":
-                System.out.println("\nReturning to home screen.\n");
+                printReturnHomeScreenMessage();
                 break;
             default:
                 System.out.println("\nThe command is not valid. Please try again.");
@@ -134,15 +133,15 @@ public class FantasyApp {
         }
     }
 
-    // REQUIRES: input to be at an index with team
-    // EFFECTS: selects a team from the league
-    private void selectTeamMenu() {
-        System.out.println("\nWhich team would you like to select? (input index)");
-        System.out.println("Registered Teams: " + league.getTeamNames());
-
+    // REQUIRES: input >= 0 with team at indexed position
+    // EFFECTS: user elects a team from the league
+    private void selectTeamOption() {
         int teamPositionInList;
         Team selectedTeam;
         input = new Scanner(System.in);
+
+        System.out.println("\nWhich team would you like to select? (input index)");
+        System.out.println("Registered Teams: " + league.getTeamNames());
 
         teamPositionInList = input.nextInt();
         selectedTeam = league.getTeam(teamPositionInList);
@@ -150,7 +149,8 @@ public class FantasyApp {
         addPlayerOption(selectedTeam);
     }
 
-    // EFFECTS: add players to a team
+    // MODIFIES: this
+    // EFFECTS: players to a team if team is not already full
     private void addPlayerOption(Team selectedTeam) {
         String player = null;
         input = new Scanner(System.in);
@@ -160,12 +160,13 @@ public class FantasyApp {
         player = input.next();
 
         Player newPlayer = new Player(player, selectedTeam);
-        selectedTeam.addPlayer(newPlayer);
-        System.out.println(player + " has been added to " + selectedTeam.getTeamName() + ".");
 
+        if (selectedTeam.addPlayer(newPlayer)) {
+            System.out.println(player + " has been added to " + selectedTeam.getTeamName() + ".");
+        } else {
+            System.out.println(newPlayer.getName() + " cannot be added because the team is full.");
+        }
         addPlayerStatsOption(newPlayer);
-
-        addAnotherPlayerOption();
     }
 
     // MODIFIES: this
@@ -196,17 +197,22 @@ public class FantasyApp {
         p.setRebounds(rebounds);
         p.setAssists(assists);
 
+        printPlayerStats(p);
+    }
 
-        System.out.println("Stats for " + p.getName() + " has been successfully added:");
+    // EFFECTS: prints out the player stats for specified player
+    private void printPlayerStats(Player p) {
+        System.out.println("Stats for " + p.getName() + ":");
         System.out.println("FG% - " + p.getFieldGoalPct());
         System.out.println("FT% - " + p.getFreeThrowPct());
         System.out.println("PTS - " + p.getPoints());
         System.out.println("REB - " + p.getAssists());
         System.out.println("AST - " + p.getRebounds());
+
+        addAnotherPlayerOption();
     }
 
-    // MODIFIES: this
-    // EFFECTS: asks user if they want to add more players to their team
+    // EFFECTS: asks user if they want to add another player to their team
     private void addAnotherPlayerOption() {
         System.out.println("\nWould you like to add another player? (Y/N)");
         String command;
@@ -216,10 +222,10 @@ public class FantasyApp {
 
         switch (command) {
             case "y":
-                selectTeamMenu();
+                selectTeamOption();
                 break;
             case "n":
-                System.out.println("\nReturning to home screen.\n");
+                printReturnHomeScreenMessage();
                 break;
             default:
                 System.out.println("\nThe command is not valid. Please try again.");
@@ -227,28 +233,32 @@ public class FantasyApp {
         }
     }
 
-    // todo: complete this
-    // EFFECTS: returns a list of team names for all the teams registered in league
-    private List<String> viewLeague() {
-        System.out.println("Here are all the registered teams:");
-        return league.getTeamNames();
+    // REQUIRES: inputted index to be >=0 and a team must exist at that index value
+    // EFFECTS: returns a list of all the teams registered in league, and a list of players in a selected team
+    private void viewLeague() {
+        System.out.println("\nHere are all the registered teams:");
+
+        if (!league.getTeamNames().isEmpty()) {
+            System.out.println(league.getTeamNames());
+            System.out.println("\nWhich team would you like to view? (input index)");
+
+            int teamPositionInList;
+            Team selectedTeam;
+            input = new Scanner(System.in);
+
+            teamPositionInList = input.nextInt();
+            selectedTeam = league.getTeam(teamPositionInList);
+            System.out.println("Here is the roster for " + selectedTeam.getTeamName() + ":");
+            System.out.println(selectedTeam.getPlayerNames());
+        } else {
+            System.out.println("THere are no registered teams.");
+        }
+
+        printReturnHomeScreenMessage();
+
     }
 
-//    // EFFECTS: selects a player from a team
-//    public void selectPlayerMenu() {
-//        System.out.println("Which player would you like to select? (input index)");
-//        System.out.println("Roster: " + team.getPlayerNames());
-//
-//        int playerPositionInList;
-//        Player selectedPlayer;
-//        input = new Scanner(System.in);
-//
-//        playerPositionInList = input.nextInt();
-//        selectedPlayer = team.getPlayer(playerPositionInList);
-//        System.out.println("Selected player: " + selectedPlayer.getName());
-//    }
-
-    // EFFECTS: prints existing league settings
+    // EFFECTS: prints existing league settings and asks if user would like to update settings
     private void printLeagueSettings(League league) {
         System.out.println("\nHere are your league settings:\n");
         System.out.println("League Name: " + league.getLeagueName());
@@ -265,7 +275,7 @@ public class FantasyApp {
                 changeLeagueSettings(league);
                 break;
             case "n":
-                System.out.println("\nReturning to home screen.\n");
+                printReturnHomeScreenMessage();
                 break;
             default:
                 System.out.println("\nThe command is not valid. Please try again.");
@@ -293,10 +303,14 @@ public class FantasyApp {
         printLeagueSettings(league);
     }
 
+    // EFFECTS: prints out returning to home screen message
+    private void printReturnHomeScreenMessage() {
+        System.out.println("\nReturning to home screen.\n");
+    }
+
     // EFFECTS: quits the application
     private void closeApplication() {
         continueApp = false;
         System.out.println("The NBA Fantasy Helper has been closed.");
     }
-
 }

@@ -89,11 +89,4 @@ public class TeamTest {
         assertFalse(myTeam.addPlayer(curry));
     }
 
-    @Test
-    public void testRemovePlayer() {
-        myTeam.addPlayer(curry);
-        myTeam.addPlayer(luka);
-        assertTrue(myTeam.removePlayer(luka));
-    }
-
 }

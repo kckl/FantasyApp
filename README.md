@@ -12,6 +12,6 @@ Personally, as someone who enjoys playing fantasy and watching the NBA, I'd be i
 #### User Stories: 
 - As a user, I want to be able to create a new team for my league
 - As a user, I want to be able to select a team, and add a new player to the team
-- As a user, I want to be able to select a player and add their per game statistics
+- As a user, I want to be able to add a player's per game statistics
 - As a user, I want to be able to select a team in the league and list out all the players on the team
-- As a user, I want to be able to select a league and list out all the teams in the league
+- As a user, I want to be able to view my league settings, and update or change them
