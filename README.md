@@ -5,13 +5,13 @@ Personally, as someone who enjoys playing fantasy and watching the NBA, I'd be i
 
 #### Main Functionality:
 - Create an NBA fantasy team, then input each player's information (eg. name, per game statistics) to build out a fantasy team
-- Using the standard 9cat format, the tool will show how the team is doing in each statistic category using colour coordination
+- Using a 5 category format, the tool will show how the team's performance in each statistical category
 - Add multiple teams to the league to show a leaderboard
-- Add multiple leagues to the tool 
+- Draft multiple players to a team
 
 #### User Stories: 
-- As a user, I want to be able to create a new league and add a list of teams to the league
-- As a user, I want to be able to create a new team and add players to the team
+- As a user, I want to be able to create a new team for my league
+- As a user, I want to be able to select a team, and add a new player to the team
 - As a user, I want to be able to select a player and add their per game statistics
-- As a user, I want to be able to select a team in the league and have it list out all the players on the team
-- As a user, I want to be able to see the rank of each team relative to the league
+- As a user, I want to be able to select a team in the league and list out all the players on the team
+- As a user, I want to be able to select a league and list out all the teams in the league
