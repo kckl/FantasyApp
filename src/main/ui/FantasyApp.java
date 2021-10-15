@@ -16,7 +16,6 @@ public class FantasyApp {
     private League league;
     private boolean continueApp;
     private Scanner input;
-    private Team team;
 
     // EFFECTS: runs the fantasy sports application
     public FantasyApp() {
@@ -30,7 +29,7 @@ public class FantasyApp {
     // EFFECTS: processes user input
     private void runFantasyApp() {
         continueApp = true;
-        String command = "";
+        String command;
 
         initialize();
         System.out.println("\nWelcome to the NBA Fantasy Helper!");
@@ -96,7 +95,7 @@ public class FantasyApp {
     // EFFECTS: adds a new team to the league unless league is full
     private void registerTeamOption() {
         System.out.println("Please input a team name. (No spaces)");
-        String teamName = "";
+        String teamName;
         teamName = input.next();
         Team newTeam = new Team(teamName);
 
