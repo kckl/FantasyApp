@@ -95,7 +95,9 @@ public class FantasyApp {
     // EFFECTS: adds a new team to the league unless league is full
     private void registerTeamOption() {
         System.out.println("Please input a team name.");
+
         String teamName;
+        input = new Scanner(System.in);
         teamName = input.nextLine();
         Team newTeam = new Team(teamName);
 
@@ -140,7 +142,7 @@ public class FantasyApp {
         System.out.println("\nWhich team would you like to select?");
         System.out.println("Registered Teams: " + league.getTeamNames());
 
-        testTeamName = input.next();
+        testTeamName = input.nextLine();
         indexPositionOfTeam = league.getTeamNames().indexOf(testTeamName);          // gets the index using team name
 
         if (!(indexPositionOfTeam == -1)) {
@@ -160,8 +162,8 @@ public class FantasyApp {
         input = new Scanner(System.in);
 
         System.out.println("What is the name of the player you would like to add to "
-                + selectedTeam.getTeamName() + "? (Eg. S.Curry)");
-        player = input.next();
+                + selectedTeam.getTeamName() + "? (Eg. S. Curry)");
+        player = input.nextLine();
 
         Player newPlayer = new Player(player, selectedTeam);
 
@@ -249,7 +251,7 @@ public class FantasyApp {
         if (!league.getTeamNames().isEmpty()) {
             System.out.println(league.getTeamNames());
             System.out.println("\nWhich team would you like to view?");
-            command = input.next();
+            command = input.nextLine();
             indexPositionOfTeam = league.getTeamNames().indexOf(command);
 
             if (!(indexPositionOfTeam == -1)) {
