@@ -94,9 +94,9 @@ public class FantasyApp {
     // MODIFIES: this
     // EFFECTS: adds a new team to the league unless league is full
     private void registerTeamOption() {
-        System.out.println("Please input a team name. (No spaces)");
+        System.out.println("Please input a team name.");
         String teamName;
-        teamName = input.next();
+        teamName = input.nextLine();
         Team newTeam = new Team(teamName);
 
         if (league.registerTeam(newTeam)) {
@@ -294,10 +294,10 @@ public class FantasyApp {
     // MODIFIES: this
     // EFFECTS: changes league name and/or size
     private void changeLeagueSettings(League league) {
-        System.out.println("What would you like to rename the league to? (No Spaces)");
+        System.out.println("What would you like to rename the league to?");
         String newName;
         input = new Scanner(System.in);
-        newName = input.next();
+        newName = input.nextLine();
         league.changeLeagueName(newName);
 
         System.out.println("What would you like to change the league size to?");

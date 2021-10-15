@@ -1,6 +1,5 @@
 package test;
 
-import model.League;
 import model.Player;
 import model.Team;
 import org.junit.jupiter.api.BeforeEach;
