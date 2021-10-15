@@ -33,8 +33,7 @@ public class FantasyApp {
         String command = "";
 
         initialize();
-
-        System.out.println("\nWelcome to the NBA Fantasy Helper! Please select from the following:\n");
+        System.out.println("\nWelcome to the NBA Fantasy Helper!");
 
         while (continueApp) {
             printHomeScreen();
@@ -59,6 +58,7 @@ public class FantasyApp {
 
     //EFFECTS: prints start up instructions to launch application
     private void printHomeScreen() {
+        System.out.println("\nPlease select from the following:\n");
         System.out.println("Enter '" + REGISTER_COMMAND + "' to register a new team.");
         System.out.println("Enter '" + DRAFT_COMMAND + "' to add players to an existing team.");
         System.out.println("Enter '" + VIEW_COMMAND + "' to view all teams.");
@@ -98,7 +98,6 @@ public class FantasyApp {
         System.out.println("Please input a team name. (No spaces)");
         String teamName = "";
         teamName = input.next();
-
         Team newTeam = new Team(teamName);
 
         if (league.registerTeam(newTeam)) {
@@ -107,7 +106,6 @@ public class FantasyApp {
         } else {
             System.out.println(newTeam.getTeamName() + " cannot be registered because the league is full.");
         }
-
         registerAnotherTeamOption();
     }
 
@@ -125,7 +123,6 @@ public class FantasyApp {
                 registerTeamOption();
                 break;
             case "n":
-                printReturnHomeScreenMessage();
                 break;
             default:
                 System.out.println("\nThe command is not valid. Please try again.");
@@ -133,26 +130,34 @@ public class FantasyApp {
         }
     }
 
-    // REQUIRES: input >= 0 with team at indexed position
-    // EFFECTS: user elects a team from the league
+    // REQUIRES: inputted string must be a team in league
+    // EFFECTS: user selects a team from the league
     private void selectTeamOption() {
-        int teamPositionInList;
+        int indexPositionOfTeam;
+        String testTeamName;
         Team selectedTeam;
         input = new Scanner(System.in);
 
-        System.out.println("\nWhich team would you like to select? (input index)");
+        System.out.println("\nWhich team would you like to select?");
         System.out.println("Registered Teams: " + league.getTeamNames());
 
-        teamPositionInList = input.nextInt();
-        selectedTeam = league.getTeam(teamPositionInList);
-        System.out.println("Selected team: " + selectedTeam.getTeamName());
-        addPlayerOption(selectedTeam);
+        testTeamName = input.next();
+        indexPositionOfTeam = league.getTeamNames().indexOf(testTeamName);          // gets the index using team name
+
+        if (!(indexPositionOfTeam == -1)) {
+            selectedTeam = league.getTeam(indexPositionOfTeam);
+            System.out.println("Selected team: " + selectedTeam.getTeamName());
+            addPlayerOption(selectedTeam);
+        } else {
+            System.out.println("\nThe command is not valid. Please try again.");
+            selectTeamOption();
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: players to a team if team is not already full
+    // EFFECTS: adds players to a team if team is not already full
     private void addPlayerOption(Team selectedTeam) {
-        String player = null;
+        String player;
         input = new Scanner(System.in);
 
         System.out.println("What is the name of the player you would like to add to "
@@ -169,8 +174,9 @@ public class FantasyApp {
         addPlayerStatsOption(newPlayer);
     }
 
+    // REQUIRES: inputted stats must be of type double
     // MODIFIES: this
-    // EFFECTS: ask user to input player's stats for each category
+    // EFFECTS: ask user to input player's stats for each category, then sets the stats
     private void addPlayerStatsOption(Player p) {
         input = new Scanner(System.in);
 
@@ -196,7 +202,6 @@ public class FantasyApp {
         p.setPoints(points);
         p.setRebounds(rebounds);
         p.setAssists(assists);
-
         printPlayerStats(p);
     }
 
@@ -208,13 +213,13 @@ public class FantasyApp {
         System.out.println("PTS - " + p.getPoints());
         System.out.println("REB - " + p.getAssists());
         System.out.println("AST - " + p.getRebounds());
-
         addAnotherPlayerOption();
     }
 
     // EFFECTS: asks user if they want to add another player to their team
     private void addAnotherPlayerOption() {
         System.out.println("\nWould you like to add another player? (Y/N)");
+
         String command;
         input = new Scanner(System.in);
         command = input.next();
@@ -225,7 +230,6 @@ public class FantasyApp {
                 selectTeamOption();
                 break;
             case "n":
-                printReturnHomeScreenMessage();
                 break;
             default:
                 System.out.println("\nThe command is not valid. Please try again.");
@@ -233,29 +237,34 @@ public class FantasyApp {
         }
     }
 
-    // REQUIRES: inputted index to be >=0 and a team must exist at that index value
+    // REQUIRES: inputted string must be a team in league
     // EFFECTS: returns a list of all the teams registered in league, and a list of players in a selected team
     private void viewLeague() {
+        int indexPositionOfTeam;
+        String command;
+        Team selectedTeam;
+        input = new Scanner(System.in);
+
         System.out.println("\nHere are all the registered teams:");
 
         if (!league.getTeamNames().isEmpty()) {
             System.out.println(league.getTeamNames());
-            System.out.println("\nWhich team would you like to view? (input index)");
+            System.out.println("\nWhich team would you like to view?");
+            command = input.next();
+            indexPositionOfTeam = league.getTeamNames().indexOf(command);
 
-            int teamPositionInList;
-            Team selectedTeam;
-            input = new Scanner(System.in);
-
-            teamPositionInList = input.nextInt();
-            selectedTeam = league.getTeam(teamPositionInList);
-            System.out.println("Here is the roster for " + selectedTeam.getTeamName() + ":");
-            System.out.println(selectedTeam.getPlayerNames());
+            if (!(indexPositionOfTeam == -1)) {
+                selectedTeam = league.getTeam(indexPositionOfTeam);
+                System.out.println("Selected team: " + selectedTeam.getTeamName());
+                System.out.println("Here is the roster for " + selectedTeam.getTeamName() + ":");
+                System.out.println(selectedTeam.getPlayerNames());
+            } else {
+                System.out.println("\nThe command is not valid. Please try again.");
+                viewLeague();
+            }
         } else {
-            System.out.println("THere are no registered teams.");
+            System.out.println("There are no registered teams.");
         }
-
-        printReturnHomeScreenMessage();
-
     }
 
     // EFFECTS: prints existing league settings and asks if user would like to update settings
@@ -265,6 +274,7 @@ public class FantasyApp {
         System.out.println("Maximum Teams: " + league.getLeagueSize());
 
         System.out.println("\nWould you like to update the league settings? (Y/N)");
+
         String command;
         input = new Scanner(System.in);
         command = input.next();
@@ -275,7 +285,6 @@ public class FantasyApp {
                 changeLeagueSettings(league);
                 break;
             case "n":
-                printReturnHomeScreenMessage();
                 break;
             default:
                 System.out.println("\nThe command is not valid. Please try again.");
@@ -290,22 +299,15 @@ public class FantasyApp {
         String newName;
         input = new Scanner(System.in);
         newName = input.next();
-
         league.changeLeagueName(newName);
 
         System.out.println("What would you like to change the league size to?");
         int newSize;
         input = new Scanner(System.in);
         newSize = input.nextInt();
-
         league.changeLeagueSize(newSize);
 
         printLeagueSettings(league);
-    }
-
-    // EFFECTS: prints out returning to home screen message
-    private void printReturnHomeScreenMessage() {
-        System.out.println("\nReturning to home screen.\n");
     }
 
     // EFFECTS: quits the application
