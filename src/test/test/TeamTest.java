@@ -21,28 +21,28 @@ public class TeamTest {
 
     @Test
     public void testConstructor() {
-       assertEquals(myTeam.getTeamName(), "My team");
+        assertEquals("My team", myTeam.getTeamName());
     }
 
     @Test
     public void testGetPlayer() {
         myTeam.addPlayer(curry);
         myTeam.addPlayer(luka);
-        assertEquals(myTeam.getPlayer(0), curry);
+        assertEquals(curry, myTeam.getPlayer(0));
     }
 
     @Test
     public void testGetPlayerNames() {
         myTeam.addPlayer(curry);
         myTeam.addPlayer(luka);
-        assertEquals(myTeam.getPlayerNames().size(), 2);
+        assertEquals(2, myTeam.getPlayerNames().size());
     }
 
     @Test
     public void testChangeTeamName() {
-        assertEquals(myTeam.getTeamName(), "My team");
+        assertEquals("My team", myTeam.getTeamName());
         myTeam.changeTeamName("The best team");
-        assertEquals(myTeam.getTeamName(), "The best team");
+        assertEquals("The best team", myTeam.getTeamName());
     }
 
     @Test

@@ -15,3 +15,5 @@ Personally, as someone who enjoys playing fantasy and watching the NBA, I'd be i
 - As a user, I want to be able to add a player's per game statistics
 - As a user, I want to be able to select a team in the league and list out all the players on the team
 - As a user, I want to be able to view my league settings, and update or change them
+- As a user, I want to be able to save my fantasy league to file
+- As a user, I want to be able to load my fantasy league from file

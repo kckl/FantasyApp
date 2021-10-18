@@ -20,8 +20,8 @@ public class PlayerTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(stephCurry.getName(), "Steph Curry");
-        assertEquals(stephCurry.getFantasyTeam(), myTeam);
+        assertEquals("Steph Curry", stephCurry.getName());
+        assertEquals(myTeam, stephCurry.getFantasyTeam());
     }
 
     @Test
@@ -31,11 +31,11 @@ public class PlayerTest {
         stephCurry.setAssists(5.8);
         stephCurry.setPoints(32.0);
         stephCurry.setRebounds(5.5);
-        assertEquals(stephCurry.getAssists(), 5.8);
-        assertEquals(stephCurry.getPoints(), 32.0);
-        assertEquals(stephCurry.getFieldGoalPct(), 48.2);
-        assertEquals(stephCurry.getFreeThrowPct(), 91.6);
-        assertEquals(stephCurry.getRebounds(), 5.5);
+        assertEquals(5.8, stephCurry.getAssists());
+        assertEquals(32.0, stephCurry.getPoints());
+        assertEquals(48.2, stephCurry.getFieldGoalPct());
+        assertEquals(91.6, stephCurry.getFreeThrowPct());
+        assertEquals(5.5, stephCurry.getRebounds());
 
     }
 

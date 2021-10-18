@@ -19,36 +19,36 @@ class LeagueTest {
     }
     @Test
     public void testConstructor() {
-        assertEquals(testLeague.getLeagueSize(), 2);
-        assertEquals(testLeague.getLeagueName(), "2k21 Basketball League");
+        assertEquals(2, testLeague.getLeagueSize());
+        assertEquals("2k21 Basketball League", testLeague.getLeagueName());
     }
 
     @Test
     public void testGetLeague() {
         testLeague.registerTeam(team1);
         testLeague.registerTeam(team2);
-        assertEquals(testLeague.getTeam(0), team1);
+        assertEquals(team1, testLeague.getTeam(0));
     }
 
     @Test
     public void testGetTeamNames() {
         testLeague.registerTeam(team1);
         testLeague.registerTeam(team2);
-        assertEquals(testLeague.getTeamNames().size(), 2);
+        assertEquals(2, testLeague.getTeamNames().size());
     }
 
     @Test
     public void testChangeLeagueName() {
-        assertEquals(testLeague.getLeagueName(), "2k21 Basketball League");
+        assertEquals("2k21 Basketball League", testLeague.getLeagueName());
         testLeague.changeLeagueName("2k21 Bball League");
-        assertEquals(testLeague.getLeagueName(), "2k21 Bball League");
+        assertEquals("2k21 Bball League", testLeague.getLeagueName());
     }
 
     @Test
     public void testChangeLeagueSize() {
-        assertEquals(testLeague.getLeagueSize(), 2);
+        assertEquals(2, testLeague.getLeagueSize());
         testLeague.changeLeagueSize(3);
-        assertEquals(testLeague.getLeagueSize(), 3);
+        assertEquals(3, testLeague.getLeagueSize());
     }
 
     @Test
