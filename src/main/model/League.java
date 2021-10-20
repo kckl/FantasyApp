@@ -1,9 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class League {
+// Represents a league having a list of teams
+public class League implements Writable {
     private List<Team> league;
     private String leagueName;
     private int leagueSize;
@@ -67,4 +72,25 @@ public class League {
         return false;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", leagueName);
+        json.put("size", leagueSize);
+        json.put("teams", teamsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns teams in this league as a JSON array
+    private JSONArray teamsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Team team : league) {
+            jsonArray.put(team.toJson());
+        }
+
+        return jsonArray;
+    }
 }
+
+

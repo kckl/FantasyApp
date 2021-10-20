@@ -1,0 +1,19 @@
+{
+    "size": 12,
+    "teams": [{
+        "roster": [{
+            "rebounds": 5,
+            "fieldGoalPct": 47,
+            "assists": 5,
+            "name": "CURRY",
+            "freeThrowPct": 90,
+            "fantasyTeam": {
+                "teamName": "team1",
+                "playerNames": ["CURRY"]
+            },
+            "points": 30
+        }],
+        "name": "team1"
+    }],
+    "name": "NBA2k21League"
+}

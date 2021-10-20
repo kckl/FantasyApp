@@ -1,5 +1,6 @@
 package model;
 
+// Represents a player having a name, team and game statistics
 public class Player {
     private String name;
     private Team fantasyTeam;

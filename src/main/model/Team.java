@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team {
+// Represents a team having a roster, team name, and max size
+public class Team implements Writable {
     private List<Player> roster;
     private String teamName;
     private List<String> playerNames;
@@ -47,13 +51,22 @@ public class Team {
     // MODIFIES: this
     // EFFECTS: adds a player to the roster if the player is not already on the roster, and if team is not full.
     //          return true if successfully added, else, return false
-    //          (?) check player is not already on another team
     public boolean addPlayer(Player p) {
         if ((!roster.contains(p)) && (roster.size() < MAX_TEAM_SIZE)) {
             roster.add(p);
             return true;
         }
         return false;
+    }
+
+    // This method references code from this repo
+    // Link: [https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git]
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", teamName);
+        json.put("roster", roster);
+        return json;
     }
 }
 

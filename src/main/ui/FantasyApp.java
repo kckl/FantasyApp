@@ -3,23 +3,34 @@ package ui;
 import model.League;
 import model.Player;
 import model.Team;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
-import java.util.Locale;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
+// Represents the fantasy league application
 public class FantasyApp {
     private static final String REGISTER_COMMAND = "register";
     private static final String DRAFT_COMMAND = "draft";
     private static final String VIEW_COMMAND = "view";
+    private static final String LOAD_COMMAND = "load";
+    private static final String SAVE_COMMAND = "save";
     private static final String SETTINGS_COMMAND = "settings";
     private static final String QUIT_APP_COMMAND = "quit";
 
+    private static final String JSON_STORE = "./data/league.json";
     private League league;
     private boolean continueApp;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the fantasy sports application
     public FantasyApp() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runFantasyApp();
     }
 
@@ -37,7 +48,12 @@ public class FantasyApp {
             printHomeScreen();
             String command = input.next();
             command = command.toLowerCase();
-            processCommand(command);
+
+            if (command.equals("quit")) {
+                closeApplication();
+            } else {
+                processCommand(command);
+            }
         }
         System.out.println("\nBye now and good luck with your team!");
     }
@@ -57,6 +73,8 @@ public class FantasyApp {
         System.out.println("\t- Enter '" + REGISTER_COMMAND + "' to register a new team.");
         System.out.println("\t- Enter '" + DRAFT_COMMAND + "' to add players to an existing team.");
         System.out.println("\t- Enter '" + VIEW_COMMAND + "' to view all teams.");
+        System.out.println("\t- Enter '" + LOAD_COMMAND + "' to load league from file.");
+        System.out.println("\t- Enter '" + SAVE_COMMAND + "' to save league from file.");
         System.out.println("\t- Enter '" + SETTINGS_COMMAND + "' to for league settings.");
         System.out.println("\t- Enter '" + QUIT_APP_COMMAND + "' to quit the application.");
     }
@@ -74,11 +92,14 @@ public class FantasyApp {
             case VIEW_COMMAND:
                 viewLeague();
                 break;
+            case LOAD_COMMAND:
+                loadLeague();
+                break;
+            case SAVE_COMMAND:
+                saveLeague();
+                break;
             case SETTINGS_COMMAND:
                 printLeagueSettings(league);
-                break;
-            case QUIT_APP_COMMAND:
-                closeApplication();
                 break;
             default:
                 System.out.println("\nThe command is not valid. Please try again.");
@@ -294,5 +315,32 @@ public class FantasyApp {
     private void closeApplication() {
         continueApp = false;
         System.out.println("The NBA Fantasy Helper has been closed.");
+    }
+
+    // This method references code from this repo
+    // Link: [https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git]
+    // EFFECTS: saves the league to file
+    private void saveLeague() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(league);
+            jsonWriter.close();
+            System.out.println("Saved " + league.getLeagueName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // This method references code from this repo
+    // Link: [https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git]
+    // MODIFIES: this
+    // EFFECTS: loads league from file
+    private void loadLeague() {
+        try {
+            league = jsonReader.read();
+            System.out.println("Loaded " + league.getLeagueName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
