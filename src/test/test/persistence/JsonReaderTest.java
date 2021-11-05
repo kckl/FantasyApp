@@ -37,7 +37,7 @@ class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderNormalLeague() {
+    void testReaderNormalLeagueWithTwoTeams() {
         JsonReader reader = new JsonReader("./data/testReaderNormalLeague.json");
         try {
             League league = reader.read();
@@ -45,8 +45,8 @@ class JsonReaderTest extends JsonTest {
             assertEquals(12, league.getLeagueSize());
             Team team1 = new Team("team11");
             league.registerTeam(team1);
-           assertEquals(1, league.getTeamNames().size());
-            checkTeam("team11", league.getTeam(0));
+           assertEquals(2, league.getTeamNames().size());
+            checkTeam("team11", league.getTeam(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

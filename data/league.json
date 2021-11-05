@@ -1,19 +1,25 @@
 {
-    "size": 12,
-    "teams": [{
-        "roster": [{
-            "rebounds": 5,
-            "fieldGoalPct": 47,
-            "assists": 5,
-            "name": "CURRY",
-            "freeThrowPct": 90,
-            "fantasyTeam": {
-                "teamName": "team1",
-                "playerNames": ["CURRY"]
-            },
-            "points": 30
-        }],
-        "name": "team1"
-    }],
-    "name": "NBA2k21League"
+    "size": 4,
+    "teams": [
+        {
+            "roster": [{
+                "rebounds": 0,
+                "fieldGoalPct": 0,
+                "playerName": "CURRY",
+                "assists": 0,
+                "freeThrowPct": 0,
+                "fantasyTeam": {
+                    "teamName": "team1",
+                    "playerNames": ["CURRY"]
+                },
+                "points": 0
+            }],
+            "name": "team1"
+        },
+        {
+            "roster": [],
+            "name": "team2"
+        }
+    ],
+    "name": "NewLeague"
 }

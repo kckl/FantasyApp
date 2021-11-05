@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import model.League;
+import model.Player;
 import model.Team;
 import org.json.*;
 
@@ -65,5 +66,24 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         Team team = new Team(name);
         league.registerTeam(team);
+        addPlayers(team, jsonObject);
+    }
+
+    // MODIFIES: league
+    // EFFECTS: parses teams from JSON object and adds them to league
+    private void addPlayers(Team team, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("roster");
+        for (Object json : jsonArray) {
+            JSONObject nextThingy = (JSONObject) json;
+            addPlayer(team, nextThingy);
+        }
+    }
+
+    // MODIFIES: league
+    // EFFECTS: parses team from JSON object and adds it to league
+    private void addPlayer(Team team, JSONObject jsonObject) {
+        String playerName = jsonObject.getString("playerName");
+        Player player = new Player(playerName, team);
+        team.addPlayer(player);
     }
 }

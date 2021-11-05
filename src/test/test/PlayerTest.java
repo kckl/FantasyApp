@@ -20,7 +20,7 @@ public class PlayerTest {
 
     @Test
     public void testConstructor() {
-        assertEquals("Steph Curry", stephCurry.getName());
+        assertEquals("Steph Curry", stephCurry.getPlayerName());
         assertEquals(myTeam, stephCurry.getFantasyTeam());
     }
 

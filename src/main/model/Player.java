@@ -1,8 +1,14 @@
 package model;
 
+import com.sun.corba.se.spi.ior.Writeable;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.io.WriteAbortedException;
+
 // Represents a player having a name, team and game statistics
-public class Player {
-    private String name;
+public class Player implements Writable {
+    private String playerName;
     private Team fantasyTeam;
     private double fieldGoalPct;
     private double freeThrowPct;
@@ -13,7 +19,7 @@ public class Player {
     // EFFECT: creates a new player with their basic information,
     //         and sets all the category statistics to 0
     public Player(String name, Team team) {
-        this.name = name;
+        this.playerName = name;
         fantasyTeam = team;
         fieldGoalPct = 0;
         freeThrowPct = 0;
@@ -23,8 +29,8 @@ public class Player {
     }
 
     // getters
-    public String getName() {
-        return name;
+    public String getPlayerName() {
+        return playerName;
     }
 
     public Team getFantasyTeam() {
@@ -71,6 +77,20 @@ public class Player {
 
     public void setAssists(double assists) {
         this.assists = assists;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("playerName", playerName);
+        json.put("fantasyTeam", fantasyTeam);
+        json.put("fieldGoalPct", fieldGoalPct);
+        json.put("freeThrowPct", freeThrowPct);
+        json.put("points", points);
+        json.put("rebounds", rebounds);
+        json.put("assists", assists);
+        return json;
     }
 
 }

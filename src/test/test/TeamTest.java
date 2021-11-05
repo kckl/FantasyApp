@@ -82,10 +82,4 @@ public class TeamTest {
         assertFalse(myTeam.addPlayer(p14));
     }
 
-    @Test
-    public void testAddPlayerAlreadyInTeam() {
-        myTeam.addPlayer(curry);
-        assertFalse(myTeam.addPlayer(curry));
-    }
-
 }

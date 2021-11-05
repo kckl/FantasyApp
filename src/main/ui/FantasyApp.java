@@ -182,7 +182,7 @@ public class FantasyApp {
         if (selectedTeam.addPlayer(newPlayer)) {
             System.out.println(player + " has been added to " + selectedTeam.getTeamName() + ".");
         } else {
-            System.out.println(newPlayer.getName() + " cannot be added because the team is full.");
+            System.out.println(newPlayer.getPlayerName() + " cannot be added because the team is full.");
         }
         addPlayerStatsOption(newPlayer);
     }
@@ -191,7 +191,7 @@ public class FantasyApp {
     // MODIFIES: this
     // EFFECTS: ask user to input player's stats for each category, then sets the stats
     private void addPlayerStatsOption(Player p) {
-        System.out.println("\nPlease input the following stats for " + p.getName() + ":");
+        System.out.println("\nPlease input the following stats for " + p.getPlayerName() + ":");
 
         System.out.println("Field goal Percentage?");
         double fieldGoalPct = input.nextDouble();
@@ -218,7 +218,7 @@ public class FantasyApp {
 
     // EFFECTS: prints out the player stats for specified player
     private void printPlayerStats(Player p) {
-        System.out.println("Stats for " + p.getName() + ":");
+        System.out.println("Stats for " + p.getPlayerName() + ":");
         System.out.println("FG% - " + p.getFieldGoalPct());
         System.out.println("FT% - " + p.getFreeThrowPct());
         System.out.println("PTS - " + p.getPoints());
