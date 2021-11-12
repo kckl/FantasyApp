@@ -320,7 +320,7 @@ public class FantasyApp {
     // This method references code from this repo
     // Link: [https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git]
     // EFFECTS: saves the league to file
-    private void saveLeague() {
+    public void saveLeague() {
         try {
             jsonWriter.open();
             jsonWriter.write(league);
@@ -335,7 +335,7 @@ public class FantasyApp {
     // Link: [https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git]
     // MODIFIES: this
     // EFFECTS: loads league from file
-    private void loadLeague() {
+    public void loadLeague() {
         try {
             league = jsonReader.read();
             System.out.println("Loaded " + league.getLeagueName() + " from " + JSON_STORE);
