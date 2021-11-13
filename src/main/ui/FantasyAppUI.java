@@ -36,7 +36,6 @@ public class FantasyAppUI extends JFrame {
 
         createMenuBar();
         createHomePanel();
-        createAddTeamButton();
         createViewLeagueButton();
         createSettingsButton();
 
@@ -44,7 +43,7 @@ public class FantasyAppUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a menu bar with menu items
+    // EFFECTS: creates a menu bar with menu items and adds to frame
     public void createMenuBar() {
         menuBar = new JMenuBar();
 
@@ -77,42 +76,31 @@ public class FantasyAppUI extends JFrame {
     // EFFECTS: create and setup home panel
     public void createHomePanel() {
         homePanel = new JPanel();
-        homePanel.setLayout(new BorderLayout());
+        homePanel.setLayout(new GridLayout(3,1,0,0));
 
         JLabel homeIcon = new JLabel();
         homeIcon.setIcon(new ImageIcon("data/nbaimage.png"));
         homeIcon.setSize(new Dimension(50, 100));
-        homePanel.add(homeIcon, BorderLayout.CENTER);
+        homePanel.add(homeIcon);
+        homeIcon.setHorizontalAlignment(JLabel.CENTER);
+
 
         homePanel.setBackground(Color.white);
         homePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
 
-
         frame.add(homePanel);
     }
 
-    // MODIFIES: this
-    // EFFECTS: create add team button and add to home panel
-    public void createAddTeamButton() {
-        JButton addTeamButton = new JButton("Add Team");
-        homePanel.add(addTeamButton, "East");
-        addTeamButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddTeamPopUp(league);
-            }
-        });
-    }
 
     // MODIFIES: this
     // EFFECTS: create view league button and add to home panel
     public void createViewLeagueButton() {
         JButton viewButton = new JButton("View League");
-        homePanel.add(viewButton, "Center");
+        homePanel.add(viewButton);
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ViewTeamFrame(league);
+                new ViewLeaguePanel(league);
             }
         });
     }
@@ -121,7 +109,15 @@ public class FantasyAppUI extends JFrame {
     // EFFECTS: create settings button and add to home panel
     public void createSettingsButton() {
         JButton settingsButton = new JButton("Settings");
-        homePanel.add(settingsButton, "West");
+        settingsButton.setPreferredSize(new Dimension(900,900));
+        settingsButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        homePanel.add(settingsButton);
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SettingsPanel(league);
+            }
+        });
     }
 
     // This method references code from this repo
@@ -132,7 +128,7 @@ public class FantasyAppUI extends JFrame {
         try {
             league = jsonReader.read();
             JOptionPane.showMessageDialog(null,
-                    "Loaded " + league.getLeagueName() + " from " + JSON_STORE,
+                    "Loaded " + league.getLeagueName() + ".",
                     "Load File", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE,
@@ -149,7 +145,7 @@ public class FantasyAppUI extends JFrame {
             jsonWriter.write(league);
             jsonWriter.close();
             JOptionPane.showMessageDialog(null,
-                    "Saved " + league.getLeagueName() + " to " + JSON_STORE,
+                    "Saved " + league.getLeagueName() + ".",
                     "Save File", JOptionPane.PLAIN_MESSAGE);
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Unable to write to file: " + JSON_STORE,
