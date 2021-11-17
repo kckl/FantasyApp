@@ -16,7 +16,7 @@ public class FantasyAppUI extends JFrame {
     private static final String JSON_STORE = "./data/league.json";
     public static final int WIDTH = 450;
     public static final int HEIGHT = 500;
-    private JFrame frame;
+    protected JFrame mainFrame;
     private JPanel homePanel;
     private JMenuBar menuBar;
     private League league;
@@ -29,17 +29,17 @@ public class FantasyAppUI extends JFrame {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
-        frame = new JFrame("NBA Fantasy Helper Application");
-        frame.setSize(WIDTH, HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        mainFrame = new JFrame("NBA Fantasy Helper Application");
+        mainFrame.setSize(WIDTH, HEIGHT);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setLocationRelativeTo(null);
 
         createMenuBar();
         createHomePanel();
         createViewLeagueButton();
         createSettingsButton();
 
-        frame.setVisible(true);
+        mainFrame.setVisible(true);
     }
 
     // MODIFIES: this
@@ -68,7 +68,7 @@ public class FantasyAppUI extends JFrame {
             }
         });
 
-        frame.setJMenuBar(menuBar);
+        mainFrame.setJMenuBar(menuBar);
     }
 
 
@@ -88,7 +88,7 @@ public class FantasyAppUI extends JFrame {
         homePanel.setBackground(Color.white);
         homePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
 
-        frame.add(homePanel);
+        mainFrame.add(homePanel);
     }
 
 

@@ -25,7 +25,6 @@ public class SettingsPanel extends JFrame {
         settingsFrame = new JFrame("Settings");
         settingsFrame.setSize(FantasyAppUI.WIDTH, FantasyAppUI.HEIGHT);
         settingsFrame.setLocationRelativeTo(null);
-        settingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         createSettingsPanel();
         displaySettings();
@@ -111,8 +110,11 @@ public class SettingsPanel extends JFrame {
             String tempSize = sizeField.getText();
             newLeagueSize = Integer.parseInt(tempSize);
             league.changeLeagueSize(newLeagueSize);
+
+            settingsFrame.setVisible(false);
+            new SettingsPanel(league);
+            revalidate();
         }
-        pack();
     }
 
 }

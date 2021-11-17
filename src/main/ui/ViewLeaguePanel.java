@@ -4,11 +4,9 @@ import model.League;
 import model.Team;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 // Represents the frame for the view league panel
 public class ViewLeaguePanel extends JFrame {
@@ -25,7 +23,6 @@ public class ViewLeaguePanel extends JFrame {
         viewLeagueFrame = new JFrame("Registered Teams");
         viewLeagueFrame.setSize(FantasyAppUI.WIDTH, FantasyAppUI.HEIGHT);
         viewLeagueFrame.setLocationRelativeTo(null);
-        viewLeagueFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         createViewLeaguePanel();
         displayTeamsList();
@@ -36,7 +33,6 @@ public class ViewLeaguePanel extends JFrame {
 
         viewLeagueFrame.setVisible(true);
     }
-
 
 
     // MODIFIES: this
@@ -57,10 +53,7 @@ public class ViewLeaguePanel extends JFrame {
     public void displayTeamsList() {
         teamNames = new JLabel();
         teamNames.setText("Registered Teams: " + league.getTeamNames());
-
         viewLeaguePanel.add(teamNames);
-        repaint();
-        revalidate();
 
     }
 
@@ -72,7 +65,16 @@ public class ViewLeaguePanel extends JFrame {
         addTeamButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addTeamPopUp();
+                if (league.isFull()) {
+                    JOptionPane.showMessageDialog(null,
+                            "The league is full.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    addTeamPopUp();
+//                    viewLeagueFrame.setVisible(false);
+//                    new ViewLeaguePanel(league);
+//                    revalidate();
+                }
             }
         });
     }
@@ -147,12 +149,17 @@ public class ViewLeaguePanel extends JFrame {
         if (league.registerTeam(newTeam)) {
             JOptionPane.showMessageDialog(null, teamName + " has been successfully registered.",
                     "Add Team", JOptionPane.PLAIN_MESSAGE);
+            viewLeagueFrame.setVisible(false);
+            new ViewLeaguePanel(league);
+            revalidate();
         } else {
             JOptionPane.showMessageDialog(null,
-                    teamName + " cannot be registered because the league is full.", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+                    teamName + " has already been used. Please choose a different team name.", "Team Name Used",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
+
+
 
     // REQUIRES: input to be a non-empty string
     // EFFECTS: create the remove team pop up for user to input team name

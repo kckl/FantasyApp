@@ -47,12 +47,11 @@ public class Team implements Writable {
         teamName = name;
     }
 
-    // REQUIRES: the player is not already on team
     // MODIFIES: this
-    // EFFECTS: adds a player to the roster if team is not full.
+    // EFFECTS: adds a player to the roster if team is not full, and if player is not already on team.
     //          return true if successfully added, else, return false
     public boolean addPlayer(Player p) {
-        if (roster.size() < MAX_TEAM_SIZE) {
+        if (roster.size() < MAX_TEAM_SIZE && !roster.contains(p)) {
             roster.add(p);
             return true;
         }
@@ -67,6 +66,21 @@ public class Team implements Writable {
         json.put("name", teamName);
         json.put("roster", roster);
         return json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Team team = (Team) o;
+
+        return teamName != null ? teamName.equals(team.teamName) : team.teamName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return teamName != null ? teamName.hashCode() : 0;
     }
 }
 

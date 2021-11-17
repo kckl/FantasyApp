@@ -62,14 +62,28 @@ public class League implements Writable {
 
 
     // MODIFIES: this
-    // EFFECTS: registers a team to the league if league is not full.
+    // EFFECTS: registers a team to the league if league is not full, and if team is not already in league.
     //          return true if team successfully registered, else, return false
     public boolean registerTeam(Team t) {
-        if (league.size() < leagueSize) {
+        if (!isFull() && !league.contains(t)) {
             league.add(t);
             return true;
         }
         return false;
+    }
+
+    //todo: fix remove method so that you can remove using string
+//    public boolean removeTeam(String name) {
+//        if (league.contains(name)) {
+//            league.remove(name);
+//            return true;
+//        }
+//        return false;
+//    }
+
+    // EFFECTS: returns true if league is full, otherwise false
+    public boolean isFull() {
+        return league.size() >= leagueSize;
     }
 
     @Override
@@ -91,6 +105,8 @@ public class League implements Writable {
 
         return jsonArray;
     }
+
+
 }
 
 

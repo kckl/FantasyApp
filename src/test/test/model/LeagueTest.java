@@ -53,6 +53,7 @@ class LeagueTest {
 
     @Test
     public void testAddTeamLeagueNotFull() {
+        assertFalse(testLeague.isFull());
         assertTrue(testLeague.registerTeam(team1));
     }
 
@@ -60,7 +61,9 @@ class LeagueTest {
     public void testAddTeamLeagueFull() {
         testLeague.registerTeam(team1);
         testLeague.registerTeam(team2);
+        assertTrue(testLeague.isFull());
         assertFalse(testLeague.registerTeam(team3));
     }
+
 
 }
