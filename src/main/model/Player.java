@@ -91,6 +91,7 @@ public class Player implements Writable {
         return json;
     }
 
+    @SuppressWarnings({"checkstyle:NeedBraces", "checkstyle:SuppressWarnings"})
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

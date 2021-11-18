@@ -68,6 +68,7 @@ public class Team implements Writable {
         return json;
     }
 
+    @SuppressWarnings({"checkstyle:NeedBraces", "checkstyle:SuppressWarnings"})
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,6 +83,8 @@ public class Team implements Writable {
     public int hashCode() {
         return teamName != null ? teamName.hashCode() : 0;
     }
+
+
 }
 
 
