@@ -28,11 +28,11 @@ public class ViewTeamPanel extends JFrame {
         viewTeamFrame.setLocationRelativeTo(null);
 
         createViewLeaguePanel();
-        displayPlayersList();
         createAddPlayerButton();
         createRemovePlayerButton();
         createSelectButton();
         createBackButton();
+        displayPlayersList();
         displayStatsSection();
 
         viewTeamFrame.setVisible(true);
@@ -42,7 +42,7 @@ public class ViewTeamPanel extends JFrame {
     // EFFECTS: create and setup view team panel
     public void createViewLeaguePanel() {
         viewTeamPanel = new JPanel();
-        viewTeamPanel.setLayout(new GridLayout(5, 2, 0, 0));
+        viewTeamPanel.setLayout(new GridLayout(4, 2, 0, 0));
 
         viewTeamPanel.setBackground(Color.white);
         viewTeamPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
@@ -169,8 +169,6 @@ public class ViewTeamPanel extends JFrame {
             addPlayer(playerName, fieldGoalPct, freeThrowPct, points,rebounds, assists);
             viewTeamFrame.setVisible(false);
             new ViewTeamPanel(roster);
-            revalidate();
-
         }
     }
 
@@ -208,6 +206,7 @@ public class ViewTeamPanel extends JFrame {
 
     }
 
+    // todo: fix null pointer exception when clicking x
     // REQUIRES: input to be a non-empty string
     // EFFECTS: create the select player pop up for user to input player name
     private void selectPlayerPopUp() {
