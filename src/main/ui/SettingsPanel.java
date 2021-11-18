@@ -100,8 +100,7 @@ public class SettingsPanel extends JFrame {
                 "League Size:", sizeField,
         };
         int option = JOptionPane.showConfirmDialog(null,
-                message, "Edit League Settings",
-                JOptionPane.OK_CANCEL_OPTION);
+                message, "Edit League Settings", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             newLeagueName = nameField.getText();
             league.changeLeagueName(newLeagueName);

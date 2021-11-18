@@ -68,6 +68,7 @@ class LeagueTest {
     @Test
     public void testRemoveTeam() {
         testLeague.registerTeam(team1);
+        testLeague.registerTeam(team2);
         assertTrue(testLeague.removeTeam("team1"));
         assertFalse(testLeague.getLeagueName().contains("team1"));
     }
