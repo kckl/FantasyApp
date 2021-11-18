@@ -85,6 +85,7 @@ public class League implements Writable {
         return false;
     }
 
+
     // EFFECTS: returns true if league is full, otherwise false
     public boolean isFull() {
         return league.size() >= leagueSize;

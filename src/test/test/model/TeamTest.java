@@ -46,6 +46,13 @@ public class TeamTest {
     }
 
     @Test
+    public void testAddPlayerAlreadyInTeam() {
+        assertTrue(myTeam.addPlayer(curry));
+        assertFalse(myTeam.addPlayer(curry));
+        assertEquals(1, myTeam.getPlayerNames().size());
+    }
+
+    @Test
     public void testAddPlayerTeamNotFull() {
         assertTrue(myTeam.addPlayer(curry));
     }
@@ -80,6 +87,7 @@ public class TeamTest {
         myTeam.addPlayer(p12);
         myTeam.addPlayer(p13);
         assertFalse(myTeam.addPlayer(p14));
+        assertTrue(myTeam.isFull());
     }
 
 }

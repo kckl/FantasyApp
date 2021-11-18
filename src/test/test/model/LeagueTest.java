@@ -66,6 +66,12 @@ class LeagueTest {
     }
 
     @Test
+    public void testAddTeamAlreadyInLeague() {
+        assertTrue(testLeague.registerTeam(team1));
+        assertFalse(testLeague.registerTeam(team1));
+    }
+
+    @Test
     public void testRemoveTeam() {
         testLeague.registerTeam(team1);
         testLeague.registerTeam(team2);
@@ -75,6 +81,7 @@ class LeagueTest {
 
     @Test
     public void testRemoveTeamNotInLeague() {
+        testLeague.registerTeam(team2);
         assertFalse(testLeague.removeTeam("team1"));
     }
 

@@ -58,7 +58,6 @@ public class Team implements Writable {
         return false;
     }
 
-    //todo: tests
     // EFFECTS: returns true if team is full, otherwise false
     public boolean isFull() {
         return roster.size() >= MAX_TEAM_SIZE;
