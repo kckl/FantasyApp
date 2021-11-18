@@ -54,7 +54,9 @@ public class TeamTest {
 
     @Test
     public void testAddPlayerTeamNotFull() {
+        assertFalse(myTeam.isFull());
         assertTrue(myTeam.addPlayer(curry));
+
     }
 
     @Test
@@ -86,8 +88,9 @@ public class TeamTest {
         myTeam.addPlayer(p11);
         myTeam.addPlayer(p12);
         myTeam.addPlayer(p13);
-        assertFalse(myTeam.addPlayer(p14));
         assertTrue(myTeam.isFull());
+        assertFalse(myTeam.addPlayer(p14));
+
     }
 
 }

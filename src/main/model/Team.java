@@ -51,7 +51,7 @@ public class Team implements Writable {
     // EFFECTS: adds a player to the roster if team is not full, and if player is not already on team.
     //          return true if successfully added, else, return false
     public boolean addPlayer(Player p) {
-        if (roster.size() < MAX_TEAM_SIZE && !roster.contains(p)) {
+        if (!isFull() && !roster.contains(p)) {
             roster.add(p);
             return true;
         }
