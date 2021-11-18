@@ -65,5 +65,21 @@ class LeagueTest {
         assertFalse(testLeague.registerTeam(team3));
     }
 
+    @Test
+    public void testRemoveTeam() {
+        testLeague.registerTeam(team1);
+        assertTrue(testLeague.removeTeam("team1"));
+        assertFalse(testLeague.getLeagueName().contains("team1"));
+    }
+
+    @Test
+    public void testRemoveTeamNotInLeague() {
+        assertFalse(testLeague.removeTeam("team1"));
+    }
+
+    @Test
+    public void testRemoveTeamEmptyLeague() {
+        assertFalse(testLeague.removeTeam("team1"));
+    }
 
 }

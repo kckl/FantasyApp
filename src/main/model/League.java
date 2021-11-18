@@ -72,14 +72,18 @@ public class League implements Writable {
         return false;
     }
 
-    //todo: fix remove method so that you can remove using string
-//    public boolean removeTeam(String name) {
-//        if (league.contains(name)) {
-//            league.remove(name);
-//            return true;
-//        }
-//        return false;
-//    }
+    // MODIFIES: this
+    // EFFECTS: removes inputted team from the league
+    //          return true if team successfully removed, else, return false
+    public boolean removeTeam(String name) {
+        for (Team t : league) {
+            if (name == t.getTeamName()) {
+                league.remove(t);
+                return true;
+            }
+        }
+        return false;
+    }
 
     // EFFECTS: returns true if league is full, otherwise false
     public boolean isFull() {

@@ -1,8 +1,14 @@
 {
     "size": 10,
-    "teams": [{
-        "roster": [],
-        "name": "fweifjweofj"
-    }],
+    "teams": [
+        {
+            "roster": [],
+            "name": "team1"
+        },
+        {
+            "roster": [],
+            "name": "team2"
+        }
+    ],
     "name": "NBA 2k21 Fantasy"
 }

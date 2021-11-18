@@ -1,7 +1,6 @@
 package ui;
 
 import model.League;
-import sun.jvm.hotspot.types.JIntField;
 
 import javax.swing.*;
 import java.awt.*;

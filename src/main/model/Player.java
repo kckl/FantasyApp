@@ -1,10 +1,8 @@
 package model;
 
-import com.sun.corba.se.spi.ior.Writeable;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.io.WriteAbortedException;
 
 // Represents a player having a name, team and game statistics
 public class Player implements Writable {
