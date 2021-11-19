@@ -99,6 +99,18 @@ class LeagueTest {
         assertFalse(testLeague.registerTeam(t2));
         assertTrue(t1.equals(t2) && t2.equals(t1));
         assertTrue(t1.hashCode() == t2.hashCode());
+        assertNotEquals(t1, null);
+        assertNotEquals(t2, null);
     }
 
+    @Test
+    public void testLeagueHashCodeNotEqual() {
+        Team t1 = new Team("team3");
+        Team t2 = new Team("team4");
+        assertTrue(testLeague.registerTeam(t1));
+        assertTrue(testLeague.registerTeam(t2));
+        assertFalse(t1.equals(t2) && t2.equals(t1));
+        assertFalse(t1.hashCode() == t2.hashCode());
+
+    }
 }

@@ -15,9 +15,10 @@ import java.io.IOException;
 public class FantasyAppUI extends JFrame {
     private static final String JSON_STORE = "./data/league.json";
     public static final int WIDTH = 450;
-    public static final int HEIGHT = 500;
+    public static final int HEIGHT = 600;
     protected JFrame mainFrame;
     private JPanel homePanel;
+    private JLabel welcome;
     private JMenuBar menuBar;
     private League league;
     private JsonWriter jsonWriter;
@@ -36,6 +37,7 @@ public class FantasyAppUI extends JFrame {
 
         createMenuBar();
         createHomePanel();
+        welcomeMessage();
         createViewLeagueButton();
         createSettingsButton();
 
@@ -76,7 +78,8 @@ public class FantasyAppUI extends JFrame {
     // EFFECTS: create and setup home panel
     public void createHomePanel() {
         homePanel = new JPanel();
-        homePanel.setLayout(new GridLayout(3,1,0,0));
+        homePanel.setLayout(new GridLayout(4,1,0,0));
+
 
         JLabel homeIcon = new JLabel();
         homeIcon.setIcon(new ImageIcon("data/nbaimage.png"));
@@ -84,18 +87,27 @@ public class FantasyAppUI extends JFrame {
         homePanel.add(homeIcon);
         homeIcon.setHorizontalAlignment(JLabel.CENTER);
 
-
         homePanel.setBackground(Color.white);
-        homePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
+        homePanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 10));
 
         mainFrame.add(homePanel);
     }
 
-
     // MODIFIES: this
+    // EFFECTS: displays list of teams registered to league and add to view team panel
+    private void welcomeMessage() {
+        welcome = new JLabel();
+        welcome.setText("<html><h3 style=\"color: #3988cf\">WELCOME TO THE NBA FANTASY HELPER!</h3></html>");
+
+        homePanel.add(welcome);
+        welcome.setHorizontalAlignment(JLabel.CENTER);
+    }
+
+        // MODIFIES: this
     // EFFECTS: create view league button and add to home panel
     public void createViewLeagueButton() {
         JButton viewButton = new JButton("View League");
+        viewButton.setPreferredSize(new Dimension(5, 5));
         homePanel.add(viewButton);
         viewButton.addActionListener(new ActionListener() {
             @Override

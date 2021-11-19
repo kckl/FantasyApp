@@ -23,7 +23,7 @@ public class ViewTeamPanel extends JFrame {
         this.roster = roster;
 
         viewTeamFrame = new JFrame("Team");
-        viewTeamFrame.setSize(800, FantasyAppUI.HEIGHT);
+        viewTeamFrame.setSize(1000, FantasyAppUI.HEIGHT + 100);
         viewTeamFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewTeamFrame.setLocationRelativeTo(null);
 
@@ -40,12 +40,12 @@ public class ViewTeamPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create and setup view team panel
-    public void createViewLeaguePanel() {
+    private void createViewLeaguePanel() {
         viewTeamPanel = new JPanel();
         viewTeamPanel.setLayout(new GridLayout(4, 2, 0, 0));
 
         viewTeamPanel.setBackground(Color.white);
-        viewTeamPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
+        viewTeamPanel.setBorder(BorderFactory.createLineBorder(Color.lightGray, 10));
 
         viewTeamFrame.add(viewTeamPanel);
 
@@ -53,19 +53,21 @@ public class ViewTeamPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: displays list of players on the selected team and add to view team panel
-    public void displayPlayersList() {
+    private void displayPlayersList() {
         playerNames = new JLabel();
         if (roster.getPlayerNames().isEmpty()) {
-            playerNames.setText("There are no players on this team.");
+            playerNames.setText("<html><h3 style=\"color: #3988cf\">There are no players on this team.</h3></html>");
         } else {
-            playerNames.setText("Players: " + roster.getPlayerNames());
+            playerNames.setText("<html><h3 style=\"color: #3988cf\">Players:</h3><br/ "
+                    + roster.getPlayerNames() + "</html>");
         }
         viewTeamPanel.add(playerNames);
+        playerNames.setHorizontalAlignment(JLabel.CENTER);
     }
 
     // MODIFIES: this
     // EFFECTS: create add player button and add to panel
-    public void createAddPlayerButton() {
+    private void createAddPlayerButton() {
         JButton addTeamButton = new JButton("Add Player");
         viewTeamPanel.add(addTeamButton);
         addTeamButton.addActionListener(new ActionListener() {
@@ -84,7 +86,7 @@ public class ViewTeamPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create remove player button and add to panel
-    public void createRemovePlayerButton() {
+    private void createRemovePlayerButton() {
         JButton removeTeamButton = new JButton("Remove Player");
         viewTeamPanel.add(removeTeamButton);
         removeTeamButton.addActionListener(new ActionListener() {
@@ -136,9 +138,10 @@ public class ViewTeamPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: creates section to display player statistics and add to panel
-    public void displayStatsSection() {
+    private void displayStatsSection() {
         playerStats = new JLabel();
         viewTeamPanel.add(playerStats);
+        playerStats.setHorizontalAlignment(JLabel.CENTER);
     }
 
     // REQUIRES: input to be a non-empty string
@@ -155,20 +158,30 @@ public class ViewTeamPanel extends JFrame {
                 "Player Name:", nameField, "Field Goal %:", fgField, "Free Throw %:",
                 ftField, "Points:", ptField, "Rebounds:", rebField, "Assists:", astField
         };
-        int option = JOptionPane.showConfirmDialog(null, message, "Add Player", JOptionPane.OK_CANCEL_OPTION);
-        if (option == JOptionPane.OK_OPTION) {
-            String playerName = nameField.getText().toUpperCase();
+        parseStatsInput(nameField, fgField, ftField, ptField, rebField, astField, message);
+    }
 
+    // REQUIRES: input to be a non-empty string
+    // EFFECTS: takes the user input for statistics and convert them to the appropriate field types
+    private void parseStatsInput(JTextField nameField, JTextField fgField, JTextField ftField,
+                                 JTextField ptField, JTextField rebField, JTextField astField, Object[] message) {
+        try {
+            int option = JOptionPane.showConfirmDialog(null, message, "Add Player", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                String playerName = nameField.getText().toUpperCase();
+                double fieldGoalPct = getDouble(fgField);
+                double freeThrowPct = getDouble(ftField);
+                double points = getDouble(ptField);
+                double rebounds = getDouble(rebField);
+                double assists = getDouble(astField);
 
-            double fieldGoalPct = getDouble(fgField);
-            double freeThrowPct = getDouble(ftField);
-            double points = getDouble(ptField);
-            double rebounds = getDouble(rebField);
-            double assists = getDouble(astField);
-
-            addPlayer(playerName, fieldGoalPct, freeThrowPct, points,rebounds, assists);
-            viewTeamFrame.setVisible(false);
-            new ViewTeamPanel(roster);
+                addPlayer(playerName, fieldGoalPct, freeThrowPct, points, rebounds, assists);
+                viewTeamFrame.setVisible(false);
+                new ViewTeamPanel(roster);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please fill in all the required fields.", "Error",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -180,7 +193,7 @@ public class ViewTeamPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: adds a new player to the team unless player is already in team
-    public void addPlayer(String addPlayerName, double fg, double ft, double pt, double rb, double ast) {
+    private void addPlayer(String addPlayerName, double fg, double ft, double pt, double rb, double ast) {
         Player newPlayer = new Player(addPlayerName, roster);
         if (roster.addPlayer(newPlayer)) {
             setPlayerStats(newPlayer, fg, ft, pt, rb, ast);
@@ -206,14 +219,15 @@ public class ViewTeamPanel extends JFrame {
 
     }
 
-    // todo: fix null pointer exception when clicking x
     // REQUIRES: input to be a non-empty string
     // EFFECTS: create the select player pop up for user to input player name
     private void selectPlayerPopUp() {
-        String selectedPlayer = JOptionPane.showInputDialog("Which player would you like to select?").toUpperCase();
-        if ((selectedPlayer != null) && (selectedPlayer.length() > 0)) {
+        try {
+            String selectedPlayer = JOptionPane.showInputDialog("Which player would you like to select?").toUpperCase();
             int indexPositionOfTeam = roster.getPlayerNames().indexOf(selectedPlayer);
             getSelectedPlayer(indexPositionOfTeam);
+        } catch (NullPointerException e) {
+            // expected
         }
     }
 
@@ -231,13 +245,13 @@ public class ViewTeamPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: updates the player stats section to display selected player's information
-    public void updatePlayerStatsSection(Player p) {
-        playerStats.setText("Stats for " + p.getPlayerName()
-                + "FG% - " + p.getFieldGoalPct()
-                + "FT% - " + p.getFreeThrowPct()
-                + "PTS - " + p.getPoints()
-                + "REB - " + p.getAssists()
-                + "AST - " + p.getRebounds());
+    private void updatePlayerStatsSection(Player p) {
+        playerStats.setText("<html><h3 style=\"color: #3988cf\">Stats for " + p.getPlayerName() + ": </h3><br/>"
+                + " FG% - " + p.getFieldGoalPct() + "<br/>"
+                + " FT% - " + p.getFreeThrowPct() + "<br/>"
+                + " PTS - " + p.getPoints() + "<br/>"
+                + " REB - " + p.getAssists() + "<br/>"
+                + " AST - " + p.getRebounds() + "<br/></html>");
         super.update(this.getGraphics());
     }
 

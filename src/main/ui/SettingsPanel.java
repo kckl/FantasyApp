@@ -35,32 +35,42 @@ public class SettingsPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create and setup settings panel
-    public void createSettingsPanel() {
+    private void createSettingsPanel() {
         settingsPanel = new JPanel();
-        settingsPanel.setLayout(new GridLayout(4, 1, 0, 0));
+        settingsPanel.setLayout(new GridLayout(5, 1, 0, 0));
+
+        JLabel homeIcon = new JLabel();
+        homeIcon.setIcon(new ImageIcon("data/nbaimage.png"));
+        homeIcon.setSize(new Dimension(50, 100));
+        settingsPanel.add(homeIcon);
+        homeIcon.setHorizontalAlignment(JLabel.CENTER);
 
         settingsPanel.setBackground(Color.white);
-        settingsPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
+        settingsPanel.setBorder(BorderFactory.createLineBorder(Color.lightGray, 10));
 
         settingsFrame.add(settingsPanel);
 
     }
 
     // EFFECTS: create text panel to display league settings
-    public void displaySettings() {
+    private void displaySettings() {
         leagueName = new JLabel();
-        leagueName.setText("League Name: " + league.getLeagueName());
+        leagueName.setText("<html><h3 style=\"color: #3988cf\"> League Name: "
+                + league.getLeagueName() + "</h3></html>\"");
 
         leagueSize = new JLabel();
-        leagueSize.setText("League Size: " + league.getLeagueSize());
+        leagueSize.setText("<html><h3 style=\"color: #3988cf\">League Size: "
+                + league.getLeagueSize() + "</h3></html>\"");
 
         settingsPanel.add(leagueName);
         settingsPanel.add(leagueSize);
+        leagueName.setHorizontalAlignment(JLabel.CENTER);
+        leagueSize.setHorizontalAlignment(JLabel.CENTER);
     }
 
     // MODIFIES: this
     // EFFECTS: create edit button and add to view team panel
-    public void createEditButton() {
+    private void createEditButton() {
         JButton editButton = new JButton("Edit");
         settingsPanel.add(editButton);
         editButton.addActionListener(new ActionListener() {
@@ -75,7 +85,7 @@ public class SettingsPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create back button and add to view team panel
-    public void createBackButton() {
+    private void createBackButton() {
         JButton backButton = new JButton("Back");
         settingsPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
@@ -91,7 +101,6 @@ public class SettingsPanel extends JFrame {
     // MODIFIES: this
     // EFFECTS: creates edit league pop up for user to input new league settings
     private void editLeaguePopUp() {
-        // todo: requires size to be int
         JTextField nameField = new JTextField();
         JTextField sizeField = new JTextField() {
         };

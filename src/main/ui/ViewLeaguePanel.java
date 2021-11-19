@@ -37,12 +37,18 @@ public class ViewLeaguePanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create and setup view league panel
-    public void createViewLeaguePanel() {
+    private void createViewLeaguePanel() {
         viewLeaguePanel = new JPanel();
-        viewLeaguePanel.setLayout(new GridLayout(5, 1, 0, 0));
+        viewLeaguePanel.setLayout(new GridLayout(6, 1, 0, 0));
+
+        JLabel homeIcon = new JLabel();
+        homeIcon.setIcon(new ImageIcon("data/nbaimage.png"));
+        homeIcon.setSize(new Dimension(50, 100));
+        viewLeaguePanel.add(homeIcon);
+        homeIcon.setHorizontalAlignment(JLabel.CENTER);
 
         viewLeaguePanel.setBackground(Color.white);
-        viewLeaguePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
+        viewLeaguePanel.setBorder(BorderFactory.createLineBorder(Color.lightGray, 10));
 
         viewLeagueFrame.add(viewLeaguePanel);
 
@@ -50,20 +56,22 @@ public class ViewLeaguePanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: displays list of teams registered to league and add to view team panel
-    public void displayTeamsList() {
+    private void displayTeamsList() {
         teamNames = new JLabel();
         if (league.getTeamNames().isEmpty()) {
-            teamNames.setText("There are no teams registered.");
+            teamNames.setText("<html><h3 style=\"color: #3988cf\">There are no teams registered.</h3></html>");
         } else {
-            teamNames.setText("Registered Teams: " + league.getTeamNames());
+            teamNames.setText("<html><h3 style=\"color: #3988cf\">Registered Teams:</h3><br/> "
+                    + league.getTeamNames() + "</html>");
         }
         viewLeaguePanel.add(teamNames);
+        teamNames.setHorizontalAlignment(JLabel.CENTER);
 
     }
 
     // MODIFIES: this
     // EFFECTS: create add team button and add to panel
-    public void createAddTeamButton() {
+    private void createAddTeamButton() {
         JButton addTeamButton = new JButton("Add Team");
         viewLeaguePanel.add(addTeamButton);
         addTeamButton.addActionListener(new ActionListener() {
@@ -82,7 +90,7 @@ public class ViewLeaguePanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create remove team button and add to panel
-    public void createRemoveTeamButton() {
+    private void createRemoveTeamButton() {
         JButton removeTeamButton = new JButton("Remove Team");
         viewLeaguePanel.add(removeTeamButton);
         removeTeamButton.addActionListener(new ActionListener() {
@@ -92,8 +100,6 @@ public class ViewLeaguePanel extends JFrame {
                     JOptionPane.showMessageDialog(null,
                             "There are no teams to remove.", "Message",
                             JOptionPane.PLAIN_MESSAGE);
-                } else {
-                    removeTeamPopUp();
                 }
             }
         });
@@ -102,7 +108,7 @@ public class ViewLeaguePanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create select button and add to view team panel
-    public void createSelectButton() {
+    private void createSelectButton() {
         JButton selectButton = new JButton("Select Team");
         viewLeaguePanel.add(selectButton);
         selectButton.addActionListener(new ActionListener() {
@@ -121,7 +127,7 @@ public class ViewLeaguePanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create back button and add to panel
-    public void createBackButton() {
+    private void createBackButton() {
         JButton backButton = new JButton("Back");
         viewLeaguePanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
@@ -145,7 +151,7 @@ public class ViewLeaguePanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: adds a new team to the league unless team name has already been used
-    public void registerTeam(String addTeamName) {
+    private void registerTeam(String addTeamName) {
         Team newTeam = new Team(addTeamName);
         if (league.registerTeam(newTeam)) {
             JOptionPane.showMessageDialog(null, addTeamName + " has been successfully registered.",
@@ -160,48 +166,33 @@ public class ViewLeaguePanel extends JFrame {
         }
     }
 
-    //todo: fix removeteam method
-    // REQUIRES: input to be a non-empty string
-    // EFFECTS: create the remove team pop up for user to input team name
-    private void removeTeamPopUp() {
-        String removeTeamName = JOptionPane.showInputDialog("Which team would you like to remove?");
-        if ((removeTeamName != null) && (removeTeamName.length() > 0)) {
-            removeTeam(removeTeamName);
-        }
-    }
+// not fully implemented as not required
 
+//    // REQUIRES: input to be a non-empty string
+//    // EFFECTS: create the remove team pop up for user to input team name
 //    private void removeTeamPopUp() {
-//        JTextField nameField = new JTextField();
-//        Object[] message = {
-//                "Team Name to remove:", nameField
-//        };
-//
-//        int option = JOptionPane.showConfirmDialog(null,
-//                message, "Remove Team",
-//                JOptionPane.OK_CANCEL_OPTION);
-//
-//        if (option == JOptionPane.OK_OPTION) {
-//            String removeTeamName = nameField.getText();
+//        String removeTeamName = JOptionPane.showInputDialog("Which team would you like to remove?");
+//        if ((removeTeamName != null) && (removeTeamName.length() > 0)) {
 //            removeTeam(removeTeamName);
-//
 //        }
 //    }
+//
 
-    // MODIFIES: this
-    // EFFECTS: removes a team from the league
-    private void removeTeam(String removeTeamName) {
-        if (league.removeTeam(removeTeamName)) {
-            JOptionPane.showMessageDialog(null, removeTeamName + " has been successfully removed.",
-                    "Remove Team", JOptionPane.PLAIN_MESSAGE);
-            viewLeagueFrame.setVisible(false);
-            new ViewLeaguePanel(league);
-            revalidate();
-        } else {
-            JOptionPane.showMessageDialog(null,
-                    removeTeamName + " can not be found.", "Team not found",
-                    JOptionPane.WARNING_MESSAGE);
-        }
-    }
+//    // MODIFIES: this
+//    // EFFECTS: removes a team from the league
+//    private void removeTeam(String removeTeamName) {
+//        if (league.removeTeam(removeTeamName)) {
+//            JOptionPane.showMessageDialog(null, removeTeamName + " has been successfully removed.",
+//                    "Remove Team", JOptionPane.PLAIN_MESSAGE);
+//            viewLeagueFrame.setVisible(false);
+//            new ViewLeaguePanel(league);
+//            revalidate();
+//        } else {
+//            JOptionPane.showMessageDialog(null,
+//                    removeTeamName + " can not be found.", "Team not found",
+//                    JOptionPane.WARNING_MESSAGE);
+//        }
+//    }
 
     // REQUIRES: input to be a non-empty string
     // EFFECTS: create the select team pop up for user to input team name
