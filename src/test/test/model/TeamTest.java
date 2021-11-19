@@ -62,19 +62,19 @@ public class TeamTest {
     @Test
     public void testAddPlayerTeamFull() {
         Player p1 = new Player("Steph Curry", myTeam);
-        Player p2 = new Player("Steph Curry", myTeam);
-        Player p3 = new Player("Steph Curry", myTeam);
-        Player p4 = new Player("Steph Curry", myTeam);
-        Player p5 = new Player("Steph Curry", myTeam);
-        Player p6 = new Player("Steph Curry", myTeam);
-        Player p7 = new Player("Steph Curry", myTeam);
-        Player p8 = new Player("Steph Curry", myTeam);
-        Player p9 = new Player("Steph Curry", myTeam);
-        Player p10 = new Player("Steph Curry", myTeam);
-        Player p11 = new Player("Steph Curry", myTeam);
-        Player p12 = new Player("Steph Curry", myTeam);
-        Player p13 = new Player("Steph Curry", myTeam);
-        Player p14 = new Player("Steph Curry", myTeam);
+        Player p2 = new Player("a", myTeam);
+        Player p3 = new Player("b", myTeam);
+        Player p4 = new Player("c", myTeam);
+        Player p5 = new Player("d", myTeam);
+        Player p6 = new Player("e", myTeam);
+        Player p7 = new Player("f", myTeam);
+        Player p8 = new Player("g", myTeam);
+        Player p9 = new Player("h", myTeam);
+        Player p10 = new Player("i", myTeam);
+        Player p11 = new Player("j", myTeam);
+        Player p12 = new Player("k", myTeam);
+        Player p13 = new Player("l", myTeam);
+        Player p14 = new Player("m", myTeam);
         myTeam.addPlayer(p1);
         myTeam.addPlayer(p2);
         myTeam.addPlayer(p3);
@@ -91,6 +91,16 @@ public class TeamTest {
         assertTrue(myTeam.isFull());
         assertFalse(myTeam.addPlayer(p14));
 
+    }
+
+    @Test
+    public void testTeamHashCodeEquals() {
+        Player p1 = new Player("Steph Curry", myTeam);
+        Player p2 = new Player("Steph Curry", myTeam);
+        assertTrue(myTeam.addPlayer(p1));
+        assertFalse(myTeam.addPlayer(p2));
+        assertTrue(p1.equals(p2) && p2.equals(p1));
+        assertTrue(p1.hashCode() == p2.hashCode());
     }
 
 }

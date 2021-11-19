@@ -1,6 +1,7 @@
 package test.model;
 
 import model.League;
+import model.Player;
 import model.Team;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -88,6 +89,16 @@ class LeagueTest {
     @Test
     public void testRemoveTeamEmptyLeague() {
         assertFalse(testLeague.removeTeam("team1"));
+    }
+
+    @Test
+    public void testLeagueHashCodeEquals() {
+        Team t1 = new Team("team3");
+        Team t2 = new Team("team3");
+        assertTrue(testLeague.registerTeam(t1));
+        assertFalse(testLeague.registerTeam(t2));
+        assertTrue(t1.equals(t2) && t2.equals(t1));
+        assertTrue(t1.hashCode() == t2.hashCode());
     }
 
 }
