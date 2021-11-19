@@ -23,7 +23,7 @@ public class ViewTeamPanel extends JFrame {
         this.roster = roster;
 
         viewTeamFrame = new JFrame("Team");
-        viewTeamFrame.setSize(1000, FantasyAppUI.HEIGHT + 100);
+        viewTeamFrame.setSize(1000, FantasyAppUI.HEIGHT);
         viewTeamFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewTeamFrame.setLocationRelativeTo(null);
 
@@ -246,7 +246,7 @@ public class ViewTeamPanel extends JFrame {
     // MODIFIES: this
     // EFFECTS: updates the player stats section to display selected player's information
     private void updatePlayerStatsSection(Player p) {
-        playerStats.setText("<html><h3 style=\"color: #3988cf\">Stats for " + p.getPlayerName() + ": </h3><br/>"
+        playerStats.setText("<html><h3 style=\"color: #3988cf\">Stats for " + p.toString() + ": </h3><br/>"
                 + " FG% - " + p.getFieldGoalPct() + "<br/>"
                 + " FT% - " + p.getFreeThrowPct() + "<br/>"
                 + " PTS - " + p.getPoints() + "<br/>"

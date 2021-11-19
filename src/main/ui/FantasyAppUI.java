@@ -140,7 +140,7 @@ public class FantasyAppUI extends JFrame {
         try {
             league = jsonReader.read();
             JOptionPane.showMessageDialog(null,
-                    "Loaded " + league.getLeagueName() + ".",
+                    "Loaded " + league.toString() + ".",
                     "Load File", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE,
@@ -157,7 +157,7 @@ public class FantasyAppUI extends JFrame {
             jsonWriter.write(league);
             jsonWriter.close();
             JOptionPane.showMessageDialog(null,
-                    "Saved " + league.getLeagueName() + ".",
+                    "Saved " + league.toString() + ".",
                     "Save File", JOptionPane.PLAIN_MESSAGE);
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Unable to write to file: " + JSON_STORE,

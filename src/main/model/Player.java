@@ -109,4 +109,9 @@ public class Player implements Writable {
     public int hashCode() {
         return playerName != null ? playerName.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return this.playerName;
+    }
 }

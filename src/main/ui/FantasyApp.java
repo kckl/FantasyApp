@@ -117,8 +117,8 @@ public class FantasyApp {
         Team newTeam = new Team(teamName);
 
         if (league.registerTeam(newTeam)) {
-            System.out.println(newTeam.getTeamName()
-                    + " has been successfully registered to " + league.getLeagueName() + ".");
+            System.out.println(newTeam.toString()
+                    + " has been successfully registered to " + league.toString() + ".");
         } else {
             System.out.println(newTeam.getTeamName() + " cannot be registered because the league is full.");
         }

@@ -55,9 +55,9 @@ public class SettingsPanel extends JFrame {
     private void displaySettings() {
         leagueInfo = new JLabel();
         leagueInfo.setText("<html><h3 style=\"color: #3988cf\"> League Name: "
-                + league.getLeagueName() + "</h3></html>\"");
+                + league.toString() + "</h3></html>\"");
 
-        leagueInfo.setText("<html><h3 style=\"color: #3988cf\">League Name: " + league.getLeagueName() + ": </h3><br/>"
+        leagueInfo.setText("<html><h3 style=\"color: #3988cf\">League Name: " + league.toString() + " </h3><br/>"
                 + "<h3 style=\"color: #3988cf\">League Size: " + league.getLeagueSize() + "<br/></html>");
 
         settingsPanel.add(leagueInfo);

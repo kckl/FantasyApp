@@ -97,6 +97,7 @@ class LeagueTest {
         Team t2 = new Team("team3");
         assertTrue(testLeague.registerTeam(t1));
         assertFalse(testLeague.registerTeam(t2));
+
         assertTrue(t1.equals(t2) && t2.equals(t1));
         assertTrue(t1.hashCode() == t2.hashCode());
         assertNotEquals(t1, null);
@@ -107,14 +108,16 @@ class LeagueTest {
     public void testLeagueHashCodeNotEqual() {
         Team t1 = new Team("team3");
         Team t2 = new Team("team4");
+        Team t3 = new Team(null);
+
         Player p1 = new Player("Player", t1);
         assertTrue(testLeague.registerTeam(t1));
         assertTrue(testLeague.registerTeam(t2));
-        assertFalse(t1.equals(t2) && t2.equals(t1));
-        assertFalse(t1.hashCode() == t2.hashCode());
-        assertFalse(t1.equals(p1) && p1.equals(t1));
-        assertFalse(t1.hashCode() == p1.hashCode());
+
+        assertEquals(t1, t2);
+        assertNotEquals(t1, t3);
+
 
     }
-    
+
 }

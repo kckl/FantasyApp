@@ -1,20 +1,5 @@
 {
     "size": 10,
-    "teams": [{
-        "roster": [{
-            "rebounds": 4,
-            "fieldGoalPct": 4,
-            "assists": 4,
-            "playerName": "G",
-            "freeThrowPct": 4,
-            "fantasyTeam": {
-                "teamName": "popo",
-                "playerNames": ["G"],
-                "full": false
-            },
-            "points": 4
-        }],
-        "name": "popo"
-    }],
+    "teams": [],
     "name": "NBA 2k21 Fantasy"
 }
