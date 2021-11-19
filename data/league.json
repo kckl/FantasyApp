@@ -1,41 +1,20 @@
 {
     "size": 10,
     "teams": [{
-        "roster": [
-            {
-                "rebounds": 2,
-                "fieldGoalPct": 2,
-                "playerName": "BOB",
-                "assists": 2,
-                "freeThrowPct": 2,
-                "fantasyTeam": {
-                    "teamName": "team",
-                    "playerNames": [
-                        "BOB",
-                        "POP"
-                    ],
-                    "full": false
-                },
-                "points": 2
+        "roster": [{
+            "rebounds": 4,
+            "fieldGoalPct": 4,
+            "assists": 4,
+            "playerName": "G",
+            "freeThrowPct": 4,
+            "fantasyTeam": {
+                "teamName": "popo",
+                "playerNames": ["G"],
+                "full": false
             },
-            {
-                "rebounds": 3,
-                "fieldGoalPct": 3,
-                "playerName": "POP",
-                "assists": 3,
-                "freeThrowPct": 3,
-                "fantasyTeam": {
-                    "teamName": "team",
-                    "playerNames": [
-                        "BOB",
-                        "POP"
-                    ],
-                    "full": false
-                },
-                "points": 3
-            }
-        ],
-        "name": "team"
+            "points": 4
+        }],
+        "name": "popo"
     }],
     "name": "NBA 2k21 Fantasy"
 }

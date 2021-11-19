@@ -50,9 +50,13 @@ class JsonReaderTest extends JsonTest {
             league.registerTeam(team1);
             assertEquals(1, teams.size());
             checkTeam("team11", league.getTeam(1));
+
+            List<String> players = team1.getPlayerNames();
             Player player1 = new Player("Curry", team1);
+            Player player2 = new Player("Luka", team1);
             team1.addPlayer(player1);
-            assertEquals(1, team1.getPlayerNames().size());
+            team1.addPlayer(player2);
+            assertEquals(2, team1.getPlayerNames().size());
             checkPlayer("Curry", player1.getFantasyTeam(), team1.getPlayer(0));
 
         } catch (IOException e) {

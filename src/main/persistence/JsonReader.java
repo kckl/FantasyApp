@@ -70,7 +70,7 @@ public class JsonReader {
     }
 
     // MODIFIES: league
-    // EFFECTS: parses teams from JSON object and adds them to league
+    // EFFECTS: parses players from JSON object and adds them to team
     private void addPlayers(Team team, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("roster");
         for (Object json : jsonArray) {
@@ -80,10 +80,20 @@ public class JsonReader {
     }
 
     // MODIFIES: league
-    // EFFECTS: parses team from JSON object and adds it to league
+    // EFFECTS: parses player from JSON object and adds it to team
     private void addPlayer(Team team, JSONObject jsonObject) {
         String playerName = jsonObject.getString("playerName");
+        double fg = jsonObject.getDouble("fieldGoalPct");
+        double ft = jsonObject.getDouble("freeThrowPct");
+        double rb = jsonObject.getDouble("rebounds");
+        double ast = jsonObject.getDouble("assists");
+        double pt = jsonObject.getDouble("points");
         Player player = new Player(playerName, team);
         team.addPlayer(player);
+        player.setFieldGoalPct(fg);
+        player.setAssists(ast);
+        player.setRebounds(rb);
+        player.setPoints(pt);
+        player.setFreeThrowPct(ft);
     }
 }
