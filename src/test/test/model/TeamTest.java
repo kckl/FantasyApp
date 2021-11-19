@@ -109,10 +109,13 @@ public class TeamTest {
     public void testTeamHashCodeNotEqual() {
         Player p1 = new Player("Curry", myTeam);
         Player p2 = new Player("Steph", myTeam);
+
         assertTrue(myTeam.addPlayer(p1));
         assertTrue(myTeam.addPlayer(p2));
         assertFalse(p1.equals(p2) && p2.equals(p1));
         assertFalse(p1.hashCode() == p2.hashCode());
+        assertFalse(p1.equals(myTeam) && myTeam.equals(p1));
+        assertFalse(p1.hashCode() == myTeam.hashCode());
     }
 
 }
