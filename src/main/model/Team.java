@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -70,7 +71,19 @@ public class Team implements Writable {
         JSONObject json = new JSONObject();
         json.put("name", teamName);
         json.put("roster", roster);
+        json.put("players", playersToJson());
         return json;
+    }
+
+    // EFFECTS: returns players in this team as a JSON array
+    private JSONArray playersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : roster) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 
     @Override
