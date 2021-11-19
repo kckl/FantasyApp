@@ -39,7 +39,7 @@ class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderNormalLeagueWithTwoTeams() {
+    void testReaderNormalLeague() {
         JsonReader reader = new JsonReader("./data/testReaderNormalLeague.json");
         try {
             League league = reader.read();
@@ -49,14 +49,11 @@ class JsonReaderTest extends JsonTest {
             Team team1 = new Team("team11");
             league.registerTeam(team1);
             assertEquals(1, teams.size());
-            checkTeam("team11", league.getTeam(1));
+            checkTeam("team11", league.getTeam(0));
 
-            List<String> players = team1.getPlayerNames();
             Player player1 = new Player("Curry", team1);
-            Player player2 = new Player("Luka", team1);
             team1.addPlayer(player1);
-            team1.addPlayer(player2);
-            assertEquals(2, team1.getPlayerNames().size());
+            assertEquals(1, team1.getPlayerNames().size());
             checkPlayer("Curry", player1.getFantasyTeam(), team1.getPlayer(0));
 
         } catch (IOException e) {
