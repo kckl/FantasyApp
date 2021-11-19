@@ -1,5 +1,6 @@
 package test.persistence;
 
+import model.Player;
 import model.Team;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,5 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class JsonTest {
     protected void checkTeam(String name, Team team) {
         assertEquals(name, team.getTeamName());
+    }
+
+    protected void checkPlayer(String name, Team team, Player player) {
+        assertEquals(name, player.getPlayerName());
+        assertEquals(team, player.getFantasyTeam());
     }
 }

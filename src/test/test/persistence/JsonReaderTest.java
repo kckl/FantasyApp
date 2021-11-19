@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,26 +45,19 @@ class JsonReaderTest extends JsonTest {
             League league = reader.read();
             assertEquals("NBA2k21League", league.getLeagueName());
             assertEquals(12, league.getLeagueSize());
+            List<String> teams = league.getTeamNames();
             Team team1 = new Team("team11");
             league.registerTeam(team1);
-           assertEquals(2, league.getTeamNames().size());
+            assertEquals(1, teams.size());
             checkTeam("team11", league.getTeam(1));
+            Player player1 = new Player("Curry", team1);
+            team1.addPlayer(player1);
+            assertEquals(1, team1.getPlayerNames().size());
+            checkPlayer("Curry", player1.getFantasyTeam(), team1.getPlayer(0));
+
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
 
-    @Test
-    void testReaderTeamWithPlayer() {
-        JsonReader reader = new JsonReader("./data/testReaderNormalLeague.json");
-        try {
-            League league = reader.read();
-            Team team = league.getTeam(0);
-            Player player1 = new Player("Curry", team);
-            team.addPlayer(player1);
-            assertEquals(1, team.getPlayerNames().size());
-        } catch (IOException e) {
-            fail("Couldn't read from file");
-        }
-    }
 }

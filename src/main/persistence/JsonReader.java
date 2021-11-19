@@ -55,8 +55,8 @@ public class JsonReader {
     private void addTeams(League league, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("teams");
         for (Object json : jsonArray) {
-            JSONObject nextThingy = (JSONObject) json;
-            addTeam(league, nextThingy);
+            JSONObject nextTeam = (JSONObject) json;
+            addTeam(league, nextTeam);
         }
     }
 
@@ -74,8 +74,8 @@ public class JsonReader {
     private void addPlayers(Team team, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("roster");
         for (Object json : jsonArray) {
-            JSONObject nextThingy = (JSONObject) json;
-            addPlayer(team, nextThingy);
+            JSONObject nextPlayer = (JSONObject) json;
+            addPlayer(team, nextPlayer);
         }
     }
 
