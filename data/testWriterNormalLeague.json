@@ -1,8 +1,28 @@
 {
     "size": 12,
     "teams": [{
-        "roster": [],
-        "players": [],
+        "roster": [{
+            "rebounds": 0,
+            "fieldGoalPct": 0,
+            "assists": 0,
+            "playerName": "Curry",
+            "freeThrowPct": 0,
+            "fantasyTeam": {
+                "teamName": "team1",
+                "playerNames": ["Curry"],
+                "full": false
+            },
+            "points": 0
+        }],
+        "players": [{
+            "rebounds": 0,
+            "fieldGoalPct": 0,
+            "playerName": "Curry",
+            "assists": 0,
+            "freeThrowPct": 0,
+            "fantasyTeam": "model.Team@6920974",
+            "points": 0
+        }],
         "name": "team1"
     }],
     "name": "NBA2k21League"

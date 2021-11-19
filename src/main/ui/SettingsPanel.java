@@ -11,8 +11,7 @@ import java.awt.event.ActionListener;
 public class SettingsPanel extends JFrame {
     private JFrame settingsFrame;
     private JPanel settingsPanel;
-    private JLabel leagueName;
-    private JLabel leagueSize;
+    private JLabel leagueInfo;
     private String newLeagueName;
     private int newLeagueSize;
     private League league;
@@ -37,7 +36,7 @@ public class SettingsPanel extends JFrame {
     // EFFECTS: create and setup settings panel
     private void createSettingsPanel() {
         settingsPanel = new JPanel();
-        settingsPanel.setLayout(new GridLayout(5, 1, 0, 0));
+        settingsPanel.setLayout(new GridLayout(4, 1, 0, 0));
 
         JLabel homeIcon = new JLabel();
         homeIcon.setIcon(new ImageIcon("data/nbaimage.png"));
@@ -54,18 +53,15 @@ public class SettingsPanel extends JFrame {
 
     // EFFECTS: create text panel to display league settings
     private void displaySettings() {
-        leagueName = new JLabel();
-        leagueName.setText("<html><h3 style=\"color: #3988cf\"> League Name: "
+        leagueInfo = new JLabel();
+        leagueInfo.setText("<html><h3 style=\"color: #3988cf\"> League Name: "
                 + league.getLeagueName() + "</h3></html>\"");
 
-        leagueSize = new JLabel();
-        leagueSize.setText("<html><h3 style=\"color: #3988cf\">League Size: "
-                + league.getLeagueSize() + "</h3></html>\"");
+        leagueInfo.setText("<html><h3 style=\"color: #3988cf\">League Name: " + league.getLeagueName() + ": </h3><br/>"
+                + "<h3 style=\"color: #3988cf\">League Size: " + league.getLeagueSize() + "<br/></html>");
 
-        settingsPanel.add(leagueName);
-        settingsPanel.add(leagueSize);
-        leagueName.setHorizontalAlignment(JLabel.CENTER);
-        leagueSize.setHorizontalAlignment(JLabel.CENTER);
+        settingsPanel.add(leagueInfo);
+        leagueInfo.setHorizontalAlignment(JLabel.CENTER);
     }
 
     // MODIFIES: this

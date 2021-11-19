@@ -79,8 +79,8 @@ public class Team implements Writable {
     private JSONArray playersToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Player p : roster) {
-            jsonArray.put(p.toJson());
+        for (Player player : roster) {
+            jsonArray.put(player.toJson());
         }
 
         return jsonArray;

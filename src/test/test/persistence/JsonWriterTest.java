@@ -1,6 +1,7 @@
 package test.persistence;
 
 import model.League;
+import model.Player;
 import model.Team;
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
@@ -51,7 +52,9 @@ class JsonWriterTest extends JsonTest {
         try {
             League league = new League("NBA2k21League", 12);
             Team team1 = new Team("team1");
+            Player player = new Player("Curry", team1);
             league.registerTeam(team1);
+            team1.addPlayer(player);
             JsonWriter writer = new JsonWriter("./data/testWriterNormalLeague.json");
             writer.open();
             writer.write(league);
@@ -62,6 +65,7 @@ class JsonWriterTest extends JsonTest {
             assertEquals("NBA2k21League", league.getLeagueName());
             assertEquals(1, league.getTeamNames().size());
             checkTeam("team1", league.getTeam(0));
+            checkPlayer("Curry", team1, player);
         } catch (IOException e) {
             fail("IOException thrown but not expected.");
         }
