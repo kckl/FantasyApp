@@ -52,14 +52,12 @@ public class League implements Writable {
     // EFFECTS: renames the league name
     public void changeLeagueName(String name) {
         leagueName = name;
-        EventLog.getInstance().logEvent(new Event("League name changed to " + name));
     }
 
     // MODIFIES: this
     // EFFECTS: changes the size of the league
     public void changeLeagueSize(int size) {
         leagueSize = size;
-        EventLog.getInstance().logEvent(new Event("League size changed to " + size));
     }
 
 
@@ -69,7 +67,6 @@ public class League implements Writable {
     public boolean registerTeam(Team t) {
         if (!isFull() && !league.contains(t)) {
             league.add(t);
-            EventLog.getInstance().logEvent(new Event(t.toString() + "registered to league"));
             return true;
         }
         return false;
@@ -82,7 +79,6 @@ public class League implements Writable {
         for (Team t : league) {
             if (name == t.getTeamName()) {
                 league.remove(t);
-                EventLog.getInstance().logEvent(new Event(name + "removed from league"));
                 return true;
             }
         }
