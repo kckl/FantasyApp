@@ -22,6 +22,7 @@ class LeagueTest {
     public void testConstructor() {
         assertEquals(2, testLeague.getLeagueSize());
         assertEquals("2k21 Basketball League", testLeague.getLeagueName());
+        assertEquals("2k21 Basketball League", testLeague.toString());
     }
 
     @Test

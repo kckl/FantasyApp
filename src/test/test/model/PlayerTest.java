@@ -21,6 +21,7 @@ public class PlayerTest {
     @Test
     public void testConstructor() {
         assertEquals("Steph Curry", stephCurry.getPlayerName());
+        assertEquals("Steph Curry", stephCurry.toString());
         assertEquals(myTeam, stephCurry.getFantasyTeam());
     }
 

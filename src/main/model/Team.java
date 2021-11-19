@@ -6,6 +6,7 @@ import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 // Represents a team having a roster, team name, and max size
 public class Team implements Writable {
@@ -98,7 +99,7 @@ public class Team implements Writable {
 
         Team team = (Team) o;
 
-        return teamName != null ? teamName.equals(team.teamName) : team.teamName == null;
+        return Objects.equals(teamName, team.teamName);
     }
 
     @Override

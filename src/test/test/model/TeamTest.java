@@ -22,6 +22,7 @@ public class TeamTest {
     @Test
     public void testConstructor() {
         assertEquals("My team", myTeam.getTeamName());
+        assertEquals("My team", myTeam.toString());
     }
 
     @Test
@@ -113,7 +114,7 @@ public class TeamTest {
 
         assertTrue(myTeam.addPlayer(p1));
         assertTrue(myTeam.addPlayer(p2));
-        assertFalse(myTeam.addPlayer(p3));
+        assertTrue(myTeam.addPlayer(p3));
         assertFalse(p1.equals(p2) && p2.equals(p1));
         assertFalse(p1.hashCode() == p2.hashCode());
         assertFalse(p1.equals(myTeam) && myTeam.equals(p1));

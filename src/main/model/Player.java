@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
 
 // Represents a player having a name, team and game statistics
 public class Player implements Writable {
@@ -102,7 +104,7 @@ public class Player implements Writable {
 
         Player player = (Player) o;
 
-        return playerName != null ? playerName.equals(player.playerName) : player.playerName == null;
+        return Objects.equals(playerName, player.playerName);
     }
 
     @Override
