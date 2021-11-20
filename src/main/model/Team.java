@@ -44,6 +44,7 @@ public class Team implements Writable {
     }
 
     //todo: implement this
+
     // MODIFIES: this
     // EFFECTS: renames the team name
     public void changeTeamName(String name) {
@@ -56,6 +57,7 @@ public class Team implements Writable {
     public boolean addPlayer(Player p) {
         if (!isFull() && !roster.contains(p)) {
             roster.add(p);
+            EventLog.getInstance().logEvent(new Event(p.toString() + " added to " + this.toString() + "'s team"));
             return true;
         }
         return false;

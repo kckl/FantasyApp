@@ -1,5 +1,56 @@
 {
-    "size": 10,
-    "teams": [],
-    "name": "NBA 2k21 Fantasy"
+    "size": 12,
+    "teams": [
+        {
+            "roster": [{
+                "rebounds": 4,
+                "fieldGoalPct": 44,
+                "playerName": "CURRY",
+                "assists": 4,
+                "freeThrowPct": 4,
+                "fantasyTeam": {
+                    "teamName": "Team1",
+                    "playerNames": ["CURRY"],
+                    "full": false
+                },
+                "points": 4
+            }],
+            "players": [{
+                "rebounds": 4,
+                "fieldGoalPct": 44,
+                "playerName": "CURRY",
+                "assists": 4,
+                "freeThrowPct": 4,
+                "fantasyTeam": "Team1",
+                "points": 4
+            }],
+            "name": "Team1"
+        },
+        {
+            "roster": [{
+                "rebounds": 4,
+                "fieldGoalPct": 4,
+                "playerName": "LUKA",
+                "assists": 4,
+                "freeThrowPct": 44,
+                "fantasyTeam": {
+                    "teamName": "Team2",
+                    "playerNames": ["LUKA"],
+                    "full": false
+                },
+                "points": 4
+            }],
+            "players": [{
+                "rebounds": 4,
+                "fieldGoalPct": 4,
+                "playerName": "LUKA",
+                "assists": 4,
+                "freeThrowPct": 44,
+                "fantasyTeam": "Team2",
+                "points": 4
+            }],
+            "name": "Team2"
+        }
+    ],
+    "name": "NBA Fantasy League"
 }

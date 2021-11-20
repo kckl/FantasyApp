@@ -24,7 +24,6 @@ public class ViewTeamPanel extends JFrame {
 
         viewTeamFrame = new JFrame("Team");
         viewTeamFrame.setSize(1000, FantasyAppUI.HEIGHT);
-        viewTeamFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewTeamFrame.setLocationRelativeTo(null);
 
         createViewLeaguePanel();

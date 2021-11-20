@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.League;
 import org.json.JSONObject;
 
@@ -30,6 +32,7 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of league to file
     public void write(League league) {
+        EventLog.getInstance().logEvent(new Event("Saved league to file"));
         JSONObject json = league.toJson();
         saveToFile(json.toString(TAB));
     }

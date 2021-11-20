@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.League;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -8,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -32,8 +36,16 @@ public class FantasyAppUI extends JFrame {
 
         mainFrame = new JFrame("NBA Fantasy Helper Application");
         mainFrame.setSize(WIDTH, HEIGHT);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainFrame.setLocationRelativeTo(null);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+                mainFrame.setVisible(false);
+                mainFrame.dispose();
+            }
+        });
 
         createMenuBar();
         createHomePanel();
@@ -162,6 +174,13 @@ public class FantasyAppUI extends JFrame {
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Unable to write to file: " + JSON_STORE,
                     "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // EFFECTS: prints out the event log
+    public void printLog(EventLog el)  {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n");
         }
     }
 }

@@ -18,3 +18,28 @@ Personally, as someone who enjoys playing fantasy and watching the NBA, I'd be i
 - As a user, I want to be able to view my league settings, and update or change them
 - As a user, I want to be able to save my fantasy league to file
 - As a user, I want to be able to load my fantasy league from file
+
+#### Phase 4: Task 2
+Fri Nov 19 16:05:00 PST 2021
+Loaded league from file
+
+Fri Nov 19 16:05:02 PST 2021
+Team1 registered to league
+
+Fri Nov 19 16:05:07 PST 2021
+Team2 registered to league
+
+Fri Nov 19 16:05:20 PST 2021
+CURRY added to Team1's team
+
+Fri Nov 19 16:05:47 PST 2021
+LUKA added to Team2's team
+
+Fri Nov 19 16:06:03 PST 2021
+League renamed to: NBA Fantasy League
+
+Fri Nov 19 16:06:03 PST 2021
+League resized to: 12
+
+Fri Nov 19 16:06:07 PST 2021
+Saved league to file

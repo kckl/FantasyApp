@@ -1,8 +1,6 @@
 package ui;
 
-import model.League;
-import model.Player;
-import model.Team;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -50,6 +48,7 @@ public class FantasyApp {
             command = command.toLowerCase();
 
             if (command.equals("quit")) {
+                printLog(EventLog.getInstance());
                 closeApplication();
             } else {
                 processCommand(command);
@@ -341,6 +340,14 @@ public class FantasyApp {
             System.out.println("Loaded " + league.getLeagueName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+
+    // EFFECTS: prints out the event log
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n");
         }
     }
 }

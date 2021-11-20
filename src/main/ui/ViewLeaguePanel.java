@@ -21,7 +21,6 @@ public class ViewLeaguePanel extends JFrame {
 
         viewLeagueFrame = new JFrame("League");
         viewLeagueFrame.setSize(FantasyAppUI.WIDTH, FantasyAppUI.HEIGHT);
-        viewLeagueFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewLeagueFrame.setLocationRelativeTo(null);
 
         createViewLeaguePanel();
