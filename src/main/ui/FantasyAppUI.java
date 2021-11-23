@@ -115,7 +115,7 @@ public class FantasyAppUI extends JFrame {
         welcome.setHorizontalAlignment(JLabel.CENTER);
     }
 
-        // MODIFIES: this
+    // MODIFIES: this
     // EFFECTS: create view league button and add to home panel
     public void createViewLeagueButton() {
         JButton viewButton = new JButton("View League");

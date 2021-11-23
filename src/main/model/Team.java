@@ -12,8 +12,7 @@ import java.util.Objects;
 public class Team implements Writable {
     private List<Player> roster;
     private String teamName;
-    private List<String> playerNames;
-    private static int MAX_TEAM_SIZE = 13;
+    private static final int MAX_TEAM_SIZE = 13;
 
     // EFFECT: creates a new fantasy team
     public Team(String name) {
@@ -33,7 +32,7 @@ public class Team implements Writable {
 
     // EFFECTS: returns a list of player names for roster
     public List<String> getPlayerNames() {
-        playerNames = new ArrayList<>();
+        List<String> playerNames = new ArrayList<>();
         String name;
 
         for (Player p : roster) {
@@ -42,8 +41,6 @@ public class Team implements Writable {
         }
         return playerNames;
     }
-
-    //todo: implement this
 
     // MODIFIES: this
     // EFFECTS: renames the team name

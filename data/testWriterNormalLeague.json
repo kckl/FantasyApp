@@ -4,8 +4,8 @@
         "roster": [{
             "rebounds": 0,
             "fieldGoalPct": 0,
-            "playerName": "Curry",
             "assists": 0,
+            "playerName": "Curry",
             "freeThrowPct": 0,
             "fantasyTeam": {
                 "teamName": "team1",

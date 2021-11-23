@@ -26,7 +26,7 @@ public class ViewTeamPanel extends JFrame {
         viewTeamFrame.setSize(1000, FantasyAppUI.HEIGHT);
         viewTeamFrame.setLocationRelativeTo(null);
 
-        createViewLeaguePanel();
+        createViewTeamPanel();
         createAddPlayerButton();
         createRemovePlayerButton();
         createSelectButton();
@@ -39,7 +39,7 @@ public class ViewTeamPanel extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create and setup view team panel
-    private void createViewLeaguePanel() {
+    private void createViewTeamPanel() {
         viewTeamPanel = new JPanel();
         viewTeamPanel.setLayout(new GridLayout(4, 2, 0, 0));
 

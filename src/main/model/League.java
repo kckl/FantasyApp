@@ -6,13 +6,13 @@ import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 // Represents a league having a list of teams
 public class League implements Writable {
     private List<Team> league;
     private String leagueName;
     private int leagueSize;
-    private List<String> teamNames;
 
     // REQUIRES: leagueName to be non-empty string
     // EFFECTS: creates a new fantasy league and sets max league size to 0
@@ -38,7 +38,7 @@ public class League implements Writable {
 
     // EFFECTS: returns a list of team names for registered teams
     public List<String> getTeamNames() {
-        teamNames = new ArrayList<>();
+        List<String> teamNames = new ArrayList<>();
         String team;
 
         for (Team t : league) {
@@ -80,7 +80,7 @@ public class League implements Writable {
     //          return true if team successfully removed, else, return false
     public boolean removeTeam(String name) {
         for (Team t : league) {
-            if (name == t.getTeamName()) {
+            if (Objects.equals(name, t.getTeamName())) {
                 league.remove(t);
                 EventLog.getInstance().logEvent(new Event(name + " removed from league"));
                 return true;
