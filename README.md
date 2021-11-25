@@ -45,6 +45,6 @@ Fri Nov 19 16:06:07 PST 2021
 Saved league to file
 
 #### Phase 4: Task 3
-- There is a fair bit of duplicated code in the GUI classes, such as ViewLeaguePanel and ViewTeamPanel. Instead, I could introduce a new abstract class and have the ViewLeaguePanel and ViewTeamPanel classes extend this class instead. This way, each time I want to create a new panel for my GUI, I can extend this new class instead of duplicating a lot of the code.
+- There is a fair bit of duplicated code in the GUI classes, such as ViewLeaguePanel and ViewTeamPanel. Instead, I could introduce a new abstract class (Eg. Panel) and have the ViewLeaguePanel and ViewTeamPanel classes extend this class instead. This way, each time I want to create a new panel for my GUI, I can extend this new class instead of duplicating a lot of the code.
 - Make all of my methods robust. Eg. ViewLeaguePanel.selectTeamPopUp() could be made robust so that the requires clause is not necessary.
-- 
+- Implement the observer pattern where SettingsPanel, ViewLeaguePanel, and ViewTeamPanel classes implements Java's Observer interface.  League, Player, and Team are the subject that extends Observable.
